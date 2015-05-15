@@ -482,7 +482,7 @@ public class SSTAR extends JFrame implements ActionListener {
 		    		}
 		    	}
 		    	//check if protein contains internal stop codons
-		    	if (!longestOrf.get("ORF").endsWith("-") && (!longestOrf.get("ORF").startsWith("-"))) {
+		    	if (!longestOrf.get("ORF").endsWith("-")) {
 		    		if 	(longestOrf.get("ORF").contains("-")) {
 		    			proteinSeqOutput.append("!! INTERNAL STOP CODON LOCATED !! \n");
 		    			proteinSeqOutput.append(longestOrf.get("ORF") + "\n");
@@ -491,7 +491,7 @@ public class SSTAR extends JFrame implements ActionListener {
 		    			proteinSeqOutput.append(longestOrf.get("ORF") + "\n");
 		    		}
 		    	}
-		    	else if (longestOrf.get("ORF").endsWith("-") || longestOrf.get("ORF").startsWith("-")) {
+		    	else if (longestOrf.get("ORF").endsWith("-")) {
 		    		proteinSeqOutput.append(longestOrf.get("ORF") + "\n");
 		    	}
 		    }
@@ -510,7 +510,7 @@ public class SSTAR extends JFrame implements ActionListener {
 		    		}
 		    	}
 		    	//check if protein contains internal stop codons
-		    	if (!longestOrf.get("ORF").endsWith("-") && (!longestOrf.get("ORF").startsWith("-"))) {
+		    	if (!longestOrf.get("ORF").endsWith("-")) {
 		    		if 	(longestOrf.get("ORF").contains("-")) {
 		    			proteinSeqOutput.append("!! INTERNAL STOP CODON LOCATED !! \n");
 		    			proteinSeqOutput.append(longestOrf.get("ORF") + "\n");
@@ -519,7 +519,7 @@ public class SSTAR extends JFrame implements ActionListener {
 		    			proteinSeqOutput.append(longestOrf.get("ORF") + "\n");
 		    		}
 		    	}
-		    	else if (longestOrf.get("ORF").endsWith("-") || longestOrf.get("ORF").startsWith("-")) {
+		    	else if (longestOrf.get("ORF").endsWith("-")) {
 		    		proteinSeqOutput.append(longestOrf.get("ORF") + "\n");
 		    	}
 		    }
