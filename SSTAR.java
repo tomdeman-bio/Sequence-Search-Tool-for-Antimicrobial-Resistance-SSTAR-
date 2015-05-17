@@ -219,7 +219,7 @@ public class SSTAR extends JFrame implements ActionListener {
 				}
 				
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "Nomore protein sequence(s) to store!");
+				JOptionPane.showMessageDialog(null, "No more protein sequence(s) to store!");
 				e.printStackTrace();
 			}
 		}
@@ -246,8 +246,8 @@ public class SSTAR extends JFrame implements ActionListener {
 	private ArrayList<String> parseBlast(String path) throws IOException {
 		BufferedReader br = null;
 		String line, blastnfile = null;
-		String check1 = " ";
-		String check2 = " ";
+		int check1 = -1;
+		int check2 = -1;
 		String coordinateContig;
 		ArrayList<String> enzymes = new ArrayList<String>();
 		final int row = 501;
@@ -274,6 +274,7 @@ public class SSTAR extends JFrame implements ActionListener {
 			String[] enzymeParts = enzyme.split("__");
 			String variant = enzymeParts[2];
 			String variantFam = enzymeParts[1];
+			String clusterNr = enzymeParts[0];
 			String contig = parts[1];
 			String similarity = parts[2];
 			String alnLen = parts[3];
@@ -284,64 +285,65 @@ public class SSTAR extends JFrame implements ActionListener {
 			int alnLenInt = Integer.parseInt(alnLen);
 			int startInteger = Integer.parseInt(start);
 			int stopInteger = Integer.parseInt(stop);
+			int cluster = Integer.parseInt(clusterNr);
 			coordinateContig = String.format("%s\t%s\t%s\t%s\t%s", contig, start, stop, alnLen, qlen);
 			int thresHold = (qlenInt/5)*2;
 			if (alnLenInt > thresHold) {
 				//fill the newEnzymeCoordinate HashMap 
 				if (startInteger < stopInteger) {
-					if (!variantFam.equals(check1)) {
+					if (!(cluster == check1)) {
 						newEnzymeCoordinate.put(variantFam, coordinateContig);
-						check1 = variantFam;
+						check1 = cluster;
 						coordinateLengthStart = startInteger;
 						coordinateLengthStop = stopInteger;
 					}
-					else if (variantFam.equals(check1)) {
+					else if (cluster == check1) {
 						//Store the longest BLAST hit region
 						if (startInteger <= coordinateLengthStart & stopInteger >= coordinateLengthStop) {
 							newEnzymeCoordinate.put(variantFam, coordinateContig);
 							coordinateLengthStart = startInteger;
 							coordinateLengthStop = stopInteger;
 						}
-						check1 = variantFam;	
+						check1 = cluster;	
 					}
 				}
 				else if (startInteger > stopInteger) {
-					if (!variantFam.equals(check1)) {
+					if (!(cluster == check1)) {
 						newEnzymeCoordinate.put(variantFam, coordinateContig);
-						check1 = variantFam;
+						check1 = cluster;
 						coordinateLengthStart = startInteger;
 						coordinateLengthStop = stopInteger;
 					}
-					else if (variantFam.equals(check1)) {
+					else if (cluster == check1) {
 						//Store the longest BLAST hit region
 						if (startInteger >= coordinateLengthStart & stopInteger <= coordinateLengthStop) {
 							newEnzymeCoordinate.put(variantFam, coordinateContig);
 							coordinateLengthStart = startInteger;
 							coordinateLengthStop = stopInteger;
 						}
-						check1 = variantFam;	
+						check1 = cluster;	
 					}
 				}
 				
 				//fill 2D array
-				if (check2.equals(variantFam)) {
+				if (check2 == cluster) {
 					enzymeScore[rowCount][colCount] = similarity;
 					colCount++;
 				} 
-				else if (!check2.equals(variantFam) && newFamily == true) {
+				else if (!(check2 == cluster) && newFamily == true) {
 					rowCount++;
 					colCount = 0;
 					enzymeScore[rowCount][colCount] = variantFam;
 					colCount++;
 					enzymeScore[rowCount][colCount] = similarity;
 					colCount++;
-					check2 = variantFam;
+					check2 = cluster;
 				}
 				else {
 					enzymeScore[rowCount][colCount] = variantFam;
 					colCount++;
 					enzymeScore[rowCount][colCount] = similarity;
-					check2 = variantFam;
+					check2 = cluster;
 					colCount++;
 					newFamily = true;
 				}
