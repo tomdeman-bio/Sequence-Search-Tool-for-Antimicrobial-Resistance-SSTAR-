@@ -35,6 +35,9 @@ public class SSTAR_win_30 extends JFrame implements ActionListener {
 	//save enzyme class, contig, start and stop position 
 	private HashMap <String, String> newEnzymeCoordinate = new HashMap<String, String>();
 	
+	//link cluster number with variant family
+	private HashMap <String, String> clusterNrlinkVariantFam = new HashMap<String, String>();
+	
 	//variable for saving the enzyme family name of potential new variants
 	private String enzymeFamName = "";
 	
@@ -288,11 +291,13 @@ public class SSTAR_win_30 extends JFrame implements ActionListener {
 			int cluster = Integer.parseInt(clusterNr);
 			coordinateContig = String.format("%s\t%s\t%s\t%s\t%s", contig, start, stop, alnLen, qlen);
 			int thresHold = (qlenInt/5)*2;
+			//fill the conversion hashmap
+			clusterNrlinkVariantFam.put(clusterNr, variantFam);
 			if (alnLenInt > thresHold) {
 				//fill the newEnzymeCoordinate HashMap 
 				if (startInteger < stopInteger) {
 					if (!(cluster == check1)) {
-						newEnzymeCoordinate.put(variantFam, coordinateContig);
+						newEnzymeCoordinate.put(clusterNr, coordinateContig);
 						check1 = cluster;
 						coordinateLengthStart = startInteger;
 						coordinateLengthStop = stopInteger;
@@ -300,7 +305,7 @@ public class SSTAR_win_30 extends JFrame implements ActionListener {
 					else if (cluster == check1) {
 						//Store the longest BLAST hit region
 						if (startInteger <= coordinateLengthStart & stopInteger >= coordinateLengthStop) {
-							newEnzymeCoordinate.put(variantFam, coordinateContig);
+							newEnzymeCoordinate.put(clusterNr, coordinateContig);
 							coordinateLengthStart = startInteger;
 							coordinateLengthStop = stopInteger;
 						}
@@ -309,7 +314,7 @@ public class SSTAR_win_30 extends JFrame implements ActionListener {
 				}
 				else if (startInteger > stopInteger) {
 					if (!(cluster == check1)) {
-						newEnzymeCoordinate.put(variantFam, coordinateContig);
+						newEnzymeCoordinate.put(clusterNr, coordinateContig);
 						check1 = cluster;
 						coordinateLengthStart = startInteger;
 						coordinateLengthStop = stopInteger;
@@ -317,7 +322,7 @@ public class SSTAR_win_30 extends JFrame implements ActionListener {
 					else if (cluster == check1) {
 						//Store the longest BLAST hit region
 						if (startInteger >= coordinateLengthStart & stopInteger <= coordinateLengthStop) {
-							newEnzymeCoordinate.put(variantFam, coordinateContig);
+							newEnzymeCoordinate.put(clusterNr, coordinateContig);
 							coordinateLengthStart = startInteger;
 							coordinateLengthStop = stopInteger;
 						}
@@ -333,14 +338,14 @@ public class SSTAR_win_30 extends JFrame implements ActionListener {
 				else if (!(check2 == cluster) && newFamily == true) {
 					rowCount++;
 					colCount = 0;
-					enzymeScore[rowCount][colCount] = variantFam;
+					enzymeScore[rowCount][colCount] = clusterNr;
 					colCount++;
 					enzymeScore[rowCount][colCount] = similarity;
 					colCount++;
 					check2 = cluster;
 				}
 				else {
-					enzymeScore[rowCount][colCount] = variantFam;
+					enzymeScore[rowCount][colCount] = clusterNr;
 					colCount++;
 					enzymeScore[rowCount][colCount] = similarity;
 					check2 = cluster;
@@ -395,7 +400,8 @@ public class SSTAR_win_30 extends JFrame implements ActionListener {
 		    //compare two ArrayLists to determine if we found new variants
 		    if (lengthDouble == lengthDoubleNew) {
 		    	if (lengthDouble != 0 && lengthDoubleNew != 0) {
-		    		newEnzymeOut = String.format("A potentially new %s discovered", enzymeFamName);
+		    		String conversion = clusterNrlinkVariantFam.get(enzymeFamName);
+		    		newEnzymeOut = String.format("A potentially new %s discovered", conversion);
 		    		
 		    		//determine if PNV is full length or truncated
 		    		String alignInfo = newEnzymeCoordinate.get(enzymeFamName);
@@ -450,7 +456,7 @@ public class SSTAR_win_30 extends JFrame implements ActionListener {
 			line = line.replaceAll("(\\r|\\n)", "");
 			
 		    if (line.equals(contig)) {
-		    	proteinSeqOutput.append(line + "_" + enzymeFamName + "\n");
+		    	proteinSeqOutput.append(line + "_" + clusterNrlinkVariantFam.get(enzymeFamName) + "\n");
 		    	selectSeq = true;
 		    }
 		    else if (line.startsWith(">")) {
