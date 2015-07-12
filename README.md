@@ -5,10 +5,10 @@
 * [Table of Contents](#table-of-contents)
   * [Introduction](#Introduction)
   * [Obtaining and installing SSTAR dependencies](#Obtaining-and-installing-SSTAR-dependencies)
-  * [Input data](*Input-data)
-  * [Running SSTAR](*Running-SSTAR)
-  * [Citing SSTAR[(*Citing-SSTAR)
-  * [Contact](*Contact)
+  * [Input data](#Input-data)
+  * [Running SSTAR](#Running-SSTAR)
+  * [Citing SSTAR[(#Citing-SSTAR)
+  * [Contact](#Contact)
 
 ## Introduction
 
