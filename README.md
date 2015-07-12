@@ -6,10 +6,10 @@ Table of Contents
 
 * [Table of Contents](#table-of-contents)
   * [Introduction](#introduction)
-  * [Obtaining and installing SSTAR dependencies](#obtaining-and-installing-SSTAR-dependencies)
+  * [Obtaining and installing SSTAR dependencies](#obtaining-and-installing-sstar-dependencies)
   * [Input data](#input-data)
-  * [Running SSTAR](#running-SSTAR)
-  * [Citing SSTAR](#citing-SSTAR)
+  * [Running SSTAR](#running-sstar)
+  * [Citing SSTAR](#citing-sstar)
   * [Contact](#contact)
 
 Introduction
@@ -23,10 +23,10 @@ SSTAR combines a standalone BLASTN with a Java interface, which operates under W
 In order to run SSTAR you need Java 1.6 or higher and standalone BLAST 2.2.29+ or BLAST 2.2.30+ installed on your system. 
 
 **For Windows users**
-BLAST+ needs to be installed in C:\\Program Files\\NCBI\\blast-2.2.29+ or C:\\Program Files\\NCBI\\blast-2.2.30+, which are the default locations after following the BLAST installation steps in the installation wizard.
+*BLAST+ needs to be installed in C:\\Program Files\\NCBI\\blast-2.2.29+ or C:\\Program Files\\NCBI\\blast-2.2.30+, which are the default locations after following the BLAST installation steps in the installation wizard.
 
 **For OS X and Linux users**
-BLAST+ needs to be installed in /usr/local/ncbi/blast/bin. One can also place links in /usr/local/ncbi/blast/bin using the “ln –s” command if BLAST+ is installed elsewhere.
+*BLAST+ needs to be installed in /usr/local/ncbi/blast/bin. One can also place links in /usr/local/ncbi/blast/bin using the “ln –s” command if BLAST+ is installed elsewhere.
 
 **For all users**
 * Java can be downloaded from the ORACLE website at: https://java.com/en/download/index.jsp
