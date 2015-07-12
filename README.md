@@ -22,9 +22,9 @@ Three SSTAR versions
 -----------------------------------------------------------------
 **In your downloaded archive you will find three different SSTAR versions**
 
-1.	SSTAR.jar is for Linux and OS X 
-2.	SSTAR_win_29.jar is for Windows systems with BLAST 2.2.29+
-3.	SSTAR_win_30.jar is for Windows systems with BLAST 2.2.30+
+1.	**SSTAR.jar** is for Linux and OS X 
+2.	**SSTAR_win_29.jar** is for Windows systems with BLAST 2.2.29+
+3.	**SSTAR_win_30.jar** is for Windows systems with BLAST 2.2.30+
 
 **JAR and Java files**
 
