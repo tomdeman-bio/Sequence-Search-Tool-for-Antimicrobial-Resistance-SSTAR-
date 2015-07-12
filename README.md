@@ -1,5 +1,15 @@
 # Manual for Sequence Search Tool for Antimicrobial Resistance (SSTAR), version 1.0
 
+## Table of Contents
+
+* [Table of Contents](#table-of-contents)
+  * [Introduction](#Introduction)
+  * [Obtaining and installing SSTAR dependencies](#Obtaining-and-installing-SSTAR-dependencies)
+  * [Input data](*Input-data)
+  * [Running SSTAR](*Running-SSTAR)
+  * [Citing SSTAR[(*Citing-SSTAR)
+  * [Contact](*Contact)
+
 ## Introduction
 
 SSTAR enables fast and accurate antimicrobial resistance (AR) surveillance from Whole Genome Sequencing (WGS) data. It is able to identify known AR genes and detect putative new variants as well as truncated genes due to internal stop codons. 
@@ -26,7 +36,7 @@ In the downloaded archive you will find three different SSTAR versions. SSTAR is
 SSTAR was successfully tested under Windows 7, OS X 10.9.5 and Ubuntu 14.04 LTS.**
 
 ## Input data
-One needs two input files in order for SSTAR to run: A microbial genome assembly and AR gene file, both in FASTA format. SSTAR is developed in a certain way so it can handle the ‘SRST2 ARG-ANNOT database header’ format. 
+One needs two input files in order for SSTAR to run: A microbial genome assembly and AR gene file, both in FASTA format. SSTAR is developed in a certain way so it can handle the ‘SRST2 database header’ format. 
 This format is specified below.
 
 ### The AR gene file header format:
@@ -38,7 +48,7 @@ The format of each AR gene FASTA header is structured like the below example:
 The AR gene family is between the first and second double underscore (CMY_Bla) and the variant is between the second and third double underscore (CMY-37).
 The first number (92) is a unique identifier for each AR gene group. The last number (402) is a unique identifier for each single variant. The other information in the header (right of the space) is ignored by SSTAR and not shown in this manual example.
 
-Users who want to use different AR databases (ResFinder or custom databases) need to make sure the headers have the exact same structure as the SRST ARG-ANNOT header format. 
+Users who want to use different AR databases (ResFinder or custom databases) need to make sure the headers have the exact same structure as the SRST2 header format. 
 
 ## Running SSTAR
 SSTAR contains an easy interface with currently only four buttons. The top two buttons are for uploading the genome assembly file and the AR gene database file. Both files need to be in FASTA format. 
@@ -60,8 +70,8 @@ The bottom left output window will show putative new variants and truncated enzy
 The protein file can be used with BLASTP against the NR database of NCBI for detecting new variants. Beta-lactamase proteins can be send to the Lahey website (http://www.lahey.org/Studies/) for verification. 
 When a protein sequence contains an internal stop codon it will be flagged underneath the FASTA header of that particular protein. This makes the FASTA file invalid and forces the user to remove that sequence from the file. Protein sequences with internal stop codons are otherwise easily missed and misinterpreted as putative new variants of an AR gene group.
 
-### Detecting modified and truncated outer membrane variants
-The bottom left output window will also show modified and/or truncated outer membrane porins (OMPs). We have included OmpK35 and OmpK36 from Klebsiella pneumoniae, OmpC and OmpF from Escherichia coli, OmpC and OmpF from Enterobacter cloacae and Omp35 and Omp36 from Enterobacter earogenes. 
+### Detecting modified and truncated outer membrane porin sequences 
+The bottom left output window will also show modified and/or truncated outer membrane porins (OMPs). We have included OmpK35, OmpK36 and OmpK37 from Klebsiella pneumoniae, OmpC and OmpF from Escherichia coli, OmpC and OmpF from Enterobacter cloacae and Omp35 and Omp36 from Enterobacter earogenes. 
 When a porin protein sequence contains an internal stop codon it will be flagged underneath the FASTA header of that particular porin as truncated. 
 
 ## Citing SSTAR
