@@ -6,6 +6,7 @@ Table of Contents
 
 * [Table of Contents](#table-of-contents)
   * [Introduction](#introduction)
+  * [Three SSTAR versions](#three-sstar-versions)
   * [Obtaining and installing SSTAR dependencies](#obtaining-and-installing-sstar-dependencies)
   * [Input data](#input-data)
   * [Running SSTAR](#running-sstar)
@@ -17,28 +18,34 @@ Introduction
 SSTAR enables fast and accurate antimicrobial resistance (AR) surveillance from Whole Genome Sequencing (WGS) data. It is able to identify known AR genes and detect putative new variants as well as truncated genes due to internal stop codons. 
 SSTAR also reports modifications and/or truncations in outer membrane porins.
 
+Three SSTAR versions
+-----------------------------------------------------------------
+* In your downloaded archive you will find three different SSTAR versions. 
+  1. SSTAR is for Linux and OS X 
+  2. SSTAR_win_29 is for Windows systems with BLAST 2.2.29+
+  3. SSTAR_win_30 is for Windows systems with BLAST 2.2.30+
+* SSTAR was successfully tested under Windows 7, OS X 10.9.5 and Ubuntu 14.04 LTS
+* Each SSTAR version is available as an executable JAR file. Double click on this file and the SSTAR tool will show up on your screen
+* The raw Java files are available too for those people who want to explore the source code.
+
 Obtaining and installing SSTAR dependencies
 -------------------------------------------
 SSTAR combines a standalone BLASTN with a Java interface, which operates under Windows and Unix systems. 
 In order to run SSTAR you need Java 1.6 or higher and standalone BLAST 2.2.29+ or BLAST 2.2.30+ installed on your system. 
 
 **For Windows users**
-* BLAST+ needs to be installed in C:\\Program Files\\NCBI\\blast-2.2.29+ or C:\\Program Files\\NCBI\\blast-2.2.30+, which are the default locations after following the BLAST installation steps in the installation wizard.
+* BLAST+ needs to be installed in C:\\Program Files\\NCBI\\blast-2.2.29+ or C:\\Program Files\\NCBI\\blast-2.2.30+, which are the default locations after following the BLAST installation steps in the installation wizard
 
 **For OS X and Linux users**
-* BLAST+ needs to be installed in /usr/local/ncbi/blast/bin. One can also place links in /usr/local/ncbi/blast/bin using the “ln –s” command if BLAST+ is installed elsewhere.
+* BLAST+ needs to be installed in /usr/local/ncbi/blast/bin. One can also place links in /usr/local/ncbi/blast/bin using the “ln –s” command if BLAST+ is installed elsewhere
 
 **For all users**
 * Java can be downloaded from the ORACLE website at: https://java.com/en/download/index.jsp
 * A BLAST+ copy and easy installation guide of standalone BLAST can be retrieved from: http://www.blaststation.com/freestuff/en/howtoNCBIBlastWin.html
 
-**SSTAR is available as an executable JAR file, however the raw java file is available too. The java source file needs to be compiled into a class file before using.
-In the downloaded archive you will find three different SSTAR versions. SSTAR is for Linux and OS X, SSTAR_win_29 is for Windows systems with BLAST 2.2.29+ and SSTAR_win_30 is for Windows systems with BLAST 2.2.30+. 
-SSTAR was successfully tested under Windows 7, OS X 10.9.5 and Ubuntu 14.04 LTS.**
-
 Input data
 ----------
-One needs two input files in order for SSTAR to run: A microbial genome assembly and AR gene file, both in FASTA format. SSTAR is developed in a certain way so it can handle the ‘SRST2 database header’ format. 
+One needs two input files in order for SSTAR to run: A microbial genome assembly and AR gene file, both in FASTA format. SSTAR is developed in a certain way so it can handle the ‘SRST2 database header’ format. Two AR database files are included with SSTAR, a SRST2 modified ARG-ANNOT database and a SRST2 modified Resfinder database. 
 This format is specified below.
 
 **The AR gene file header format**
