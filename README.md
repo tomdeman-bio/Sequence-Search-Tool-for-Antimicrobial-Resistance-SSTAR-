@@ -3,12 +3,12 @@
 ## Table of Contents
 
 * [Table of Contents](#table-of-contents)
-  * [Introduction](#Introduction)
-  * [Obtaining and installing SSTAR dependencies](#Obtaining-and-installing-SSTAR-dependencies)
-  * [Input data](#Input-data)
-  * [Running SSTAR](#Running-SSTAR)
-  * [Citing SSTAR[(#Citing-SSTAR)
-  * [Contact](#Contact)
+  * [Introduction](#introduction)
+  * [Obtaining and installing SSTAR dependencies](#obtaining-and-installing-SSTAR-dependencies)
+  * [Input data](#input-data)
+  * [Running SSTAR](#running-SSTAR)
+  * [Citing SSTAR](#citing-SSTAR)
+  * [Contact](#contact)
 
 ## Introduction
 
