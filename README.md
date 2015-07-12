@@ -21,6 +21,7 @@ SSTAR also reports modifications and/or truncations in outer membrane porins.
 Three SSTAR versions
 -----------------------------------------------------------------
 **In your downloaded archive you will find three different SSTAR versions**
+
 1.	SSTAR is for Linux and OS X 
 2.	SSTAR_win_29 is for Windows systems with BLAST 2.2.29+
 3.	SSTAR_win_30 is for Windows systems with BLAST 2.2.30+
