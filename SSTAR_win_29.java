@@ -486,6 +486,9 @@ public class SSTAR_win_29 extends JFrame implements ActionListener {
 		    		int count = protein.length() - protein.replace("-", "").length();
 		    		if (count < stopCodons) {
 		    			longestOrf.put("ORF", proteinSeq.get(i));
+		    			if (proteinSeq.get(i).startsWith("M")) {
+		    				break;
+		    			}
 		    			stopCodons = count;
 		    		}
 		    	}
@@ -514,6 +517,9 @@ public class SSTAR_win_29 extends JFrame implements ActionListener {
 		    		int count = protein.length() - protein.replace("-", "").length();
 		    		if (count < stopCodons) {
 		    			longestOrf.put("ORF", proteinSeq.get(i));
+		    			if (proteinSeq.get(i).startsWith("M")) {
+		    				break;
+		    			}
 		    			stopCodons = count;
 		    		}
 		    	}
