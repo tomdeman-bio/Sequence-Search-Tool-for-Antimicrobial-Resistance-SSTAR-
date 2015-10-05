@@ -93,7 +93,7 @@ public class SSTAR extends JFrame implements ActionListener {
 		JScrollPane scrollPane1 = new JScrollPane(progessOutput);
 		output.add(scrollPane1);
 		
-		enzymeOutput = new JTextArea("Antimicrobial gene listing.... Gene name - Contig - Alignment length - Gene length \n",15,30);
+		enzymeOutput = new JTextArea("Antimicrobial gene listing.... Gene name - Contig - Seq similarity - Alignment length - Gene length \n",15,30);
 		JScrollPane scrollPane2 = new JScrollPane(enzymeOutput);
 		output.add(scrollPane2);
 		
@@ -174,11 +174,12 @@ public class SSTAR extends JFrame implements ActionListener {
 							progessOutput.append("Your BLASTN run has finished!!!" + newLine);
 							//call method for parsing BLAST output 
 							blastOutput = parseBlast(newPath);
-							for (int i = 0; i < blastOutput.size(); i = i+4) {
+							for (int i = 0; i < blastOutput.size(); i = i+5) {
 								enzymeOutput.append(blastOutput.get(i) + tab);
 								enzymeOutput.append(blastOutput.get(i+1) + tab);
-								enzymeOutput.append(blastOutput.get(i+2) + tab);
-								enzymeOutput.append(blastOutput.get(i+3) + newLine);
+								enzymeOutput.append(blastOutput.get(i+2) + "%" + tab);
+								enzymeOutput.append(blastOutput.get(i+3) + tab);
+								enzymeOutput.append(blastOutput.get(i+4) + newLine);
 							}
 						}
 					} else {
@@ -289,7 +290,7 @@ public class SSTAR extends JFrame implements ActionListener {
 			int startInteger = Integer.parseInt(start);
 			int stopInteger = Integer.parseInt(stop);
 			int cluster = Integer.parseInt(clusterNr);
-			coordinateContig = String.format("%s\t%s\t%s\t%s\t%s", contig, start, stop, alnLen, qlen);
+			coordinateContig = String.format("%s\t%s\t%s\t%s\t%s\t%s", contig, start, stop, alnLen, qlen, similarity);
 			int thresHold = (qlenInt/5)*2;
 			//fill the conversion hashmap
 			clusterNrlinkVariantFam.put(clusterNr, variantFam);
@@ -357,6 +358,7 @@ public class SSTAR extends JFrame implements ActionListener {
 					blastnfile = String.format("%s", variant);
 					enzymes.add(blastnfile);
 					enzymes.add(contig);
+					enzymes.add(similarity);
 					enzymes.add(alnLen);
 					enzymes.add(qlen);
 				}
@@ -408,7 +410,7 @@ public class SSTAR extends JFrame implements ActionListener {
 		    		String[] alignInfoParts = alignInfo.split("\t");
 		    		int alnignL = Integer.parseInt(alignInfoParts[3]);
 		    		int queryL = Integer.parseInt(alignInfoParts[4]);
-			    	enzymeOutput.append(newEnzymeOut + "\t" + alignInfoParts[0] + "\t" + alignInfoParts[3] + "\t" + alignInfoParts[4] + "\t" + newLine);
+			    	enzymeOutput.append(newEnzymeOut + "\t" + alignInfoParts[0] + "\t" + alignInfoParts[5] + "%" + "\t" + alignInfoParts[3] + "\t" + alignInfoParts[4] + "\t" + newLine);
 			    	
 			    	//set threshold for generating protein sequences
 		    		int seqGenerateThreshold = (queryL/5)*4;
@@ -485,8 +487,6 @@ public class SSTAR extends JFrame implements ActionListener {
 		    		String protein = proteinSeq.get(i);
 		    		int count = protein.length() - protein.replace("-", "").length();
 		    		if (count < stopCodons) {
-		    			System.out.println("\n");
-		    			System.out.println(proteinSeq.get(i));
 		    			longestOrf.put("ORF", proteinSeq.get(i));
 		    			if (proteinSeq.get(i).startsWith("M")) {
 		    				break;
