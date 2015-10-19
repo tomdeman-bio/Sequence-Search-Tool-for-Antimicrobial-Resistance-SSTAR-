@@ -10,6 +10,7 @@ Table of Contents
   * [Obtaining and installing SSTAR dependencies](#obtaining-and-installing-sstar-dependencies)
   * [Input data](#input-data)
   * [Running SSTAR](#running-sstar)
+  * [Planned features](#planned-features)
   * [Citing SSTAR](#citing-sstar)
   * [Contact](#contact)
 
@@ -91,6 +92,11 @@ When a protein sequence contains an internal stop codon it will be flagged under
 
 The bottom left output window will also show modified and/or truncated outer membrane porins (OMPs). We have included OmpK35, OmpK36 and OmpK37 from Klebsiella pneumoniae, OmpC and OmpF from Escherichia coli, OmpC and OmpF from Enterobacter cloacae and Omp35 and Omp36 from Enterobacter earogenes. 
 When a porin protein sequence contains an internal stop codon it will be flagged underneath the FASTA header of that particular porin as truncated. 
+
+Planned features
+----------------
+1.	Multiple genome assembly file upload (multithreading)
+2.	Compatibility with other BLAST+ versions
 
 Citing SSTAR
 ------------

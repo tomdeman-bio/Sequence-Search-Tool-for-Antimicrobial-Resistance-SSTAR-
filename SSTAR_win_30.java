@@ -449,15 +449,26 @@ public class SSTAR_win_30 extends JFrame implements ActionListener {
 		String line;
 		String seq = "";
 		boolean selectSeq = false;
+		boolean selectSeqNCBI = false;
 		String arGene;
 		String revArGene;
+		String[] splitNcbiHeader = null;
 		HashMap <String, String> contigNewVariant = new HashMap <String, String>();
 		ArrayList <String> proteinSeq = new ArrayList<String>();
 		
 		while((line=in.readLine())!=null) {
 			line = line.replaceAll("(\\r|\\n)", "");
 			
-		    if (line.equals(contig)) {
+			if (line.matches(".*\\s+.*") && line.startsWith(">")) {
+				splitNcbiHeader = line.split("\\s+");
+				selectSeqNCBI = false;
+				if (splitNcbiHeader[0].equals(contig)) {
+					proteinSeqOutput.append(splitNcbiHeader[0] + "_" + clusterNrlinkVariantFam.get(enzymeFamName) + "\n");
+					selectSeqNCBI = true;
+				}
+			}
+			
+			if (line.equals(contig)) {
 		    	proteinSeqOutput.append(line + "_" + clusterNrlinkVariantFam.get(enzymeFamName) + "\n");
 		    	selectSeq = true;
 		    }
@@ -467,6 +478,10 @@ public class SSTAR_win_30 extends JFrame implements ActionListener {
 		    else if (selectSeq) {
 		    	seq += line;
 		    	contigNewVariant.put(contig, seq); 
+		    }
+		    else if (selectSeqNCBI) {
+		    	seq += line;
+		    	contigNewVariant.put(splitNcbiHeader[0], seq);
 		    }
 		}
 		in.close();
