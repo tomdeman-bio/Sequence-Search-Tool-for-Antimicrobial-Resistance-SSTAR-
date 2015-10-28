@@ -6,7 +6,7 @@ Table of Contents
 
 * [Table of Contents](#table-of-contents)
   * [Introduction](#introduction)
-  * [Three SSTAR versions](#three-sstar-versions)
+  * [Four SSTAR versions](#four-sstar-versions)
   * [Obtaining and installing SSTAR dependencies](#obtaining-and-installing-sstar-dependencies)
   * [Input data](#input-data)
   * [Running SSTAR](#running-sstar)
@@ -19,13 +19,14 @@ Introduction
 SSTAR enables fast and accurate antimicrobial resistance (AR) surveillance from Whole Genome Sequencing (WGS) data. It is able to identify known AR genes and detect putative new variants as well as truncated genes due to internal stop codons. 
 SSTAR also reports modifications and/or truncations in outer membrane porins.
 
-Three SSTAR versions
+Four SSTAR versions
 -----------------------------------------------------------------
-**In your downloaded archive you will find three different SSTAR versions**
+**In your downloaded archive you will find four different SSTAR versions**
 
 1.	**SSTAR.jar** is for Linux and OS X 
 2.	**SSTAR_win_29.jar** is for Windows systems with BLAST 2.2.29+
 3.	**SSTAR_win_30.jar** is for Windows systems with BLAST 2.2.30+
+4.	**SSTAR_win_31.jar** is for Windows systems with BLAST 2.2.31+
 
 **JAR and Java files**
 
@@ -36,10 +37,10 @@ Three SSTAR versions
 Obtaining and installing SSTAR dependencies
 -------------------------------------------
 SSTAR combines a standalone BLASTN with a Java interface, which operates under Windows and Unix systems. 
-In order to run SSTAR you need Java 1.6 or higher and standalone BLAST 2.2.29+ or BLAST 2.2.30+ installed on your system. 
+In order to run SSTAR you need Java 1.6 or higher and standalone BLAST 2.2.29+, BLAST 2.2.30+ or BLAST 2.2.31+ installed on your system. 
 
 **For Windows users**
-* BLAST+ needs to be installed in C:\\Program Files\\NCBI\\blast-2.2.29+ or C:\\Program Files\\NCBI\\blast-2.2.30+, which are the default locations after following the BLAST installation steps in the installation wizard
+* BLAST+ needs to be installed in C:\\Program Files\\NCBI\\blast-2.2.29+, C:\\Program Files\\NCBI\\blast-2.2.30+ or C:\\Program Files\\NCBI\\blast-2.2.31+, which are the default locations after following the BLAST installation steps in the installation wizard
 
 **For OS X and Linux users**
 * BLAST+ needs to be installed in /usr/local/ncbi/blast/bin. One can also place links in /usr/local/ncbi/blast/bin using the “ln –s” command if BLAST+ is installed elsewhere
