@@ -87,7 +87,7 @@ Below the potential new variants SSTAR lists the AR genes that share 100% sequen
 **Detecting new and truncated AR gene variants**
 
 The bottom left output window will show putative new variants and truncated enzymes in protein space. The protein sequences can be exported to a plain text file using the “Export potentially new enzyme(s)” button. The file is saved in the same directory as the input genome assembly file. 
-The protein file can be used with BLASTP against the NR database of NCBI for detecting new variants. Potential novel Beta-lactamase proteins can be submitted to the NCBI (http://www.ncbi.nlm.nih.gov/pathogens/submit_beta_lactamase/) for verification. 
+The protein file can be used with BLASTP against the NR database of NCBI for detecting new variants. Potential novel beta-lactamase proteins can be submitted to the NCBI (http://www.ncbi.nlm.nih.gov/pathogens/submit_beta_lactamase/) for verification. 
 When a protein sequence contains an internal stop codon it will be flagged underneath the FASTA header of that particular protein. This makes the FASTA file invalid and forces the user to remove that sequence from the file. Protein sequences with internal stop codons are otherwise easily missed and misinterpreted as putative new variants of an AR gene group.
 
 **Detecting modified and truncated outer membrane porin sequences**
