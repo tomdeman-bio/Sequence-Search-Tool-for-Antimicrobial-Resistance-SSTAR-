@@ -127,6 +127,7 @@ Planned features
 Citing SSTAR
 ------------
 Manuscript submitted! 
+Please cite "https://github.com/tomdeman-bio/Sequence-Search-Tool-for-Antimicrobial-Resistance-SSTAR-" for now.
 
 Contact
 -------
