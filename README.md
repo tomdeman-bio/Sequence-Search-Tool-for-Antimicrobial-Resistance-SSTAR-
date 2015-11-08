@@ -126,7 +126,7 @@ Planned features
 
 Citing SSTAR
 ------------
-Manuscript in progress
+Manuscript submitted! 
 
 Contact
 -------
