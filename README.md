@@ -122,7 +122,8 @@ The BLASTN file is in tabular form and each line represents an allele that was p
 Planned features
 ----------------
 1.	Multiple genome assembly file upload (multithreading)
-2.	Compatibility with other BLAST+ versions
+2.	User defined input for % identity and AR gene coverage
+3.	Compatibility with other BLAST+ versions
 
 Citing SSTAR
 ------------
