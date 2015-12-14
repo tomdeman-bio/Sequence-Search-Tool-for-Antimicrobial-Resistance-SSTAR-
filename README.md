@@ -45,7 +45,7 @@ In order to run SSTAR you need Java Runtime Environment (JRE) 6 or newer and sta
 * BLAST+ needs to be installed in /usr/local/ncbi/blast/bin. One can also place links in /usr/local/ncbi/blast/bin using the “ln –s” command if BLAST+ is installed elsewhere
 
 **For all users**
-* Java can be downloaded from the ORACLE website at: https://java.com/en/download/index.jsp
+* Java can be downloaded from the Oracle website at: https://java.com/en/download/index.jsp
 * A BLAST+ copy and easy installation guide of standalone BLAST can be retrieved from: http://www.blaststation.com/freestuff/en/howtoNCBIBlastWin.html
 
 Input data
@@ -124,6 +124,7 @@ Planned features
 2.	Compatibility with other BLAST+ versions
 3.	An eraser button for all three output windows
 4.	A method to use two AR gene databases (ResFinder and ARG-ANNOT) simultaneously
+5.	Add HMMER functionality for detecting new genes
 
 Citing SSTAR
 ------------
