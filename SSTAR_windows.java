@@ -21,18 +21,18 @@ import javax.swing.text.PlainDocument;
 import java.io.*;
 import java.util.*;
 
-class JTextFieldLimit extends PlainDocument {
+class JTextFieldLimitWin extends PlainDocument {
 	  /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private int limit;
-	  JTextFieldLimit(int limit) {
+	  JTextFieldLimitWin(int limit) {
 	    super();
 	    this.limit = limit;
 	  }
 
-	  JTextFieldLimit(int limit, boolean upper) {
+	  JTextFieldLimitWin(int limit, boolean upper) {
 	    super();
 	    this.limit = limit;
 	  }
@@ -47,7 +47,7 @@ class JTextFieldLimit extends PlainDocument {
 	  }
 }
 
-public class SSTAR extends JFrame implements ActionListener {
+public class SSTAR_windows extends JFrame implements ActionListener {
 	
 	/**
 	 * 
@@ -70,9 +70,9 @@ public class SSTAR extends JFrame implements ActionListener {
 	//variable for saving the enzyme family name of potential new variants
 	private String enzymeFamName = "";
 	
-	public SSTAR () {
+	public SSTAR_windows () {
 		
-		super("SSTAR v1.0");
+		super("SSTAR for Windows v1.0");
 		
 		Container window = getContentPane();
 		window.setLayout(new BorderLayout());
@@ -159,7 +159,7 @@ public class SSTAR extends JFrame implements ActionListener {
 		gbc.gridy = 3;
 		gbc.anchor = GridBagConstraints.LINE_START;
 		options.add(seqId, gbc);
-		seqId.setDocument(new JTextFieldLimit(4));
+		seqId.setDocument(new JTextFieldLimitWin(4));
 		
 		geneDetectButton = new JButton("Identify resistance genes!");
 		gbc.gridx = 0;
@@ -193,7 +193,7 @@ public class SSTAR extends JFrame implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		SSTAR frame = new SSTAR();
+		SSTAR_windows frame = new SSTAR_windows();
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
@@ -222,12 +222,12 @@ public class SSTAR extends JFrame implements ActionListener {
 						progessOutput.append(showAssemblyPath + newLine);
 					}
 					//remove file from assembly path
-					ArrayList<String> assembly_pathNoFile = new ArrayList<String>(Arrays.asList(assembly_path.split("/")));
+					ArrayList<String> assembly_pathNoFile = new ArrayList<String>(Arrays.asList(assembly_path.split("\\\\")));
 					assembly_pathNoFile.remove(assembly_pathNoFile.size()-1);
 					StringBuffer restorePath = new StringBuffer();
 					for (int i = 0; i < assembly_pathNoFile.size(); i++) {
 						restorePath.append(assembly_pathNoFile.get(i));
-						restorePath.append("/");
+						restorePath.append("\\");
 					}
 					newPath = restorePath.toString();
 					
@@ -238,24 +238,46 @@ public class SSTAR extends JFrame implements ActionListener {
 							progessOutput.append("Building BLAST database......" + newLine);
 							
 							//check if makeblastdb is available on your system
-							File myBlastdb = new File ("/usr/local/ncbi/blast/bin/makeblastdb");
-							boolean isThereDB = myBlastdb.exists( );
-							if (isThereDB) {
-								dbBuild = String.format("/usr/local/ncbi/blast/bin/makeblastdb -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
+							File myBlastdb1 = new File ("C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\makeblastdb.exe");
+							boolean isThereDB1 = myBlastdb1.exists( );
+							File myBlastdb2 = new File ("C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\makeblastdb.exe");
+							boolean isThereDB2 = myBlastdb2.exists( );
+							File myBlastdb3 = new File ("C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\makeblastdb.exe");
+							boolean isThereDB3 = myBlastdb3.exists( );
+							if (isThereDB1) {
+								dbBuild = String.format("\"C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\makeblastdb.exe\" -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
 								Process p = Runtime.getRuntime().exec (dbBuild);
 								p.waitFor ();
-							} else {
+							} else if (isThereDB2) {
+								dbBuild = String.format("\"C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\makeblastdb.exe\" -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
+								Process p = Runtime.getRuntime().exec (dbBuild);
+								p.waitFor ();
+							} else if (isThereDB3) {
+								 dbBuild = String.format("\"C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\makeblastdb.exe\" -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
+								Process p = Runtime.getRuntime().exec (dbBuild);
+								p.waitFor ();
+							}
+							else {
 								progessOutput.append("Cannot find makeblastdb!!!... is it installed?" + newLine);
 							}
 							//run a BLASTN against your custom BLAST database
 							progessOutput.append("Performing a BLASTN run......" + newLine);
 							String[] cmd = new String[13];
 							//check if BLASTN is available on your system
-							File myBlast = new File ("/usr/local/ncbi/blast/bin/blastn");
-							boolean isThereBlast = myBlast.exists( );
-							if (isThereBlast) {
-								cmd[0] = "/usr/local/ncbi/blast/bin/blastn";
-							} else {
+							File myBlast1 = new File ("C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\blastn.exe");
+							boolean isThereBlast1 = myBlast1.exists( );
+							File myBlast2 = new File ("C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\blastn.exe");
+							boolean isThereBlast2 = myBlast2.exists( );
+							File myBlast3 = new File ("C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\blastn.exe");
+							boolean isThereBlast3 = myBlast3.exists( );
+							if (isThereBlast1) {
+								cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\blastn.exe\"";
+							} else if (isThereBlast2) {
+								cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\blastn.exe\"";
+							} else if (isThereBlast3) {
+								cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\blastn.exe\"";
+							}
+							else {
 								progessOutput.append("Cannot find BLASTN!!!... is it installed?" + newLine);
 							}
 							cmd[1] = "-query";
@@ -273,7 +295,7 @@ public class SSTAR extends JFrame implements ActionListener {
 							if (seqId.getText().trim().length() == 0) {
 								JOptionPane.showMessageDialog(null,"No sequence similarity value inserted" + newLine);
 								//remove the BLAST database files to save disk space
-								removeDB = String.format("rm %sblastDB.nhr %sblastDB.nin %sblastDB.nsq", newPath, newPath, newPath);
+								removeDB = String.format("cmd /c del %sblastDB.nhr %sblastDB.nin %sblastDB.nsq", newPath, newPath, newPath);
 								Process p3 = Runtime.getRuntime().exec (removeDB);
 								p3.waitFor ();
 							}
@@ -285,7 +307,7 @@ public class SSTAR extends JFrame implements ActionListener {
 								progessOutput.append("Going over your raw BLAST output now...." + newLine);
 								
 								//remove the BLAST database files to save disk space
-								removeDB = String.format("rm %sblastDB.nhr %sblastDB.nin %sblastDB.nsq", newPath, newPath, newPath);
+								removeDB = String.format("cmd /c del %sblastDB.nhr %sblastDB.nin %sblastDB.nsq", newPath, newPath, newPath);
 								Process p4 = Runtime.getRuntime().exec (removeDB);
 								p4.waitFor ();
 								
@@ -321,14 +343,14 @@ public class SSTAR extends JFrame implements ActionListener {
 				assemblyPath2 = assemblySelection.getText();
 				
 				//remove file from assembly path
-				ArrayList<String> assembly_pathNoFile2 = new ArrayList<String>(Arrays.asList(assemblyPath2.split("/")));
+				ArrayList<String> assembly_pathNoFile2 = new ArrayList<String>(Arrays.asList(assemblyPath2.split("\\\\")));
 				//store the assembly file name in a variable for later
 				fileName = assembly_pathNoFile2.get(assembly_pathNoFile2.size()-1);
 				assembly_pathNoFile2.remove(assembly_pathNoFile2.size()-1);
 				StringBuffer restorePath2 = new StringBuffer();
 				for (int i = 0; i < assembly_pathNoFile2.size(); i++) {
 					restorePath2.append(assembly_pathNoFile2.get(i));
-					restorePath2.append("/");
+					restorePath2.append("\\");
 				}
 				newPath2 = restorePath2.toString();
 			}
