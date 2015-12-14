@@ -80,9 +80,10 @@ The second output window displays the AR resistance genes and porins that are id
 4.	Alignment length
 5.	AR gene length
 
-First, SSTAR lists the potential new alleles or variants at the top of the window. These are the variants that share between X% and 99.99% sequence similarity with an AR gene in the used database. The user is free to pick a value for X.
-Below the potential new variants SSTAR lists the AR genes that share 100% sequence similarity with AR genes in the used database. The alignment length shows the user how much of the AR database gene is found on your genome. In other words, when the alignment length equals the gene length one identified the full AR gene with 100% sequence similarity. 
-**The export button will export the data as a tab delimited file and can then be opened in a spreadsheet, such as Microsoft Excel. The file is saved in the same directory as the input genome assembly file**
+First, SSTAR lists the potential new alleles or variants at the top of the window. These are the variants that share between **X%** and **99.99%** sequence similarity with an AR gene in the used database. The user is free to pick a value for X.
+Below the potential new variants SSTAR lists the AR genes that share 100% sequence similarity with AR genes in the used database. The alignment length shows the user how much of the AR database gene is found on your genome. In other words, when the alignment length equals the gene length one identified the full AR gene with 100% sequence similarity.
+
+**The export button will export the data as a tab delimited file and can then be opened in a spreadsheet, such as Microsoft Excel. The file is stored in the same directory as the input genome assembly file**
 
 **Detecting new and truncated AR gene variants**
 
@@ -121,6 +122,7 @@ Planned features
 1.	Multiple genome assembly file upload (multithreading)
 2.	Compatibility with other BLAST+ versions
 3.	An eraser button for all three output windows
+4.	A method to use two AR gene databases (ResFinder and ARG-ANNOT) simultaneously
 
 Citing SSTAR
 ------------
