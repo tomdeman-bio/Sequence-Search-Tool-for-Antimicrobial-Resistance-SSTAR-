@@ -6,11 +6,11 @@ Table of Contents
 
 * [Table of Contents](#table-of-contents)
   * [Introduction](#introduction)
-  * [Four SSTAR versions](#four-sstar-versions)
+  * [Two SSTAR versions](#two-sstar-versions)
   * [Obtaining and installing SSTAR dependencies](#obtaining-and-installing-sstar-dependencies)
   * [Input data](#input-data)
   * [Running SSTAR](#running-sstar)
-  * [Output files produced by SSTAR](#output-files-produced-by-sstar)
+  * [BLAST output file produced by SSTAR](#blast-output-file-produced-by-sstar)
   * [Planned features](#planned-features)
   * [Citing SSTAR](#citing-sstar)
   * [Contact](#contact)
@@ -20,25 +20,23 @@ Introduction
 SSTAR enables fast and accurate antimicrobial resistance (AR) surveillance from Whole Genome Sequencing (WGS) data. It is able to identify known AR genes and detect putative new variants as well as truncated genes due to internal stop codons. 
 SSTAR also reports modifications and/or truncations in outer membrane porins.
 
-Four SSTAR versions
+Two SSTAR versions
 -----------------------------------------------------------------
-**In your downloaded archive you will find four different SSTAR versions**
+**In your downloaded archive you will find two different SSTAR versions**
 
 1.	**SSTAR.jar** is for Linux and OS X 
-2.	**SSTAR_win_29.jar** is for Windows systems with BLAST 2.2.29+
-3.	**SSTAR_win_30.jar** is for Windows systems with BLAST 2.2.30+
-4.	**SSTAR_win_31.jar** is for Windows systems with BLAST 2.2.31+
+2.	**SSTAR_windows.jar** is for Windows 
 
 **JAR and Java files**
 
-* Each SSTAR version is available as an executable JAR file. Double click on this file and the SSTAR tool will show up on your screen
+* Each SSTAR version is available as an executable JAR file. Double click on this file and the SSTAR tool will pop up on your screen
 * The raw Java files are available as well for those people who want to explore the source code
-* SSTAR was successfully tested under Windows 7, OS X 10.9.5 and Ubuntu 14.04 LTS
+* SSTAR was successfully tested under Windows 7 and Windows 10, OS X 10.9.5 and Ubuntu 14.04 LTS
 
 Obtaining and installing SSTAR dependencies
 -------------------------------------------
 SSTAR combines a standalone BLASTN with a Java interface, which operates under Windows and Unix systems. 
-In order to run SSTAR you need Java 1.6 or higher and standalone BLAST 2.2.29+, BLAST 2.2.30+ or BLAST 2.2.31+ installed on your system. 
+In order to run SSTAR you need Java Runtime Environment (JRE) 6 or newer and standalone BLAST 2.2.29+, BLAST 2.2.30+ or BLAST 2.2.31+ installed on your system. 
 
 **For Windows users**
 * BLAST+ needs to be installed in C:\\Program Files\\NCBI\\blast-2.2.29+, C:\\Program Files\\NCBI\\blast-2.2.30+ or C:\\Program Files\\NCBI\\blast-2.2.31+, which are the default locations after following the BLAST installation steps in the installation wizard
@@ -69,11 +67,12 @@ Users who want to use different AR databases (ResFinder or custom databases) nee
 Running SSTAR
 -------------
 SSTAR contains an easy interface with currently only four buttons. The top two buttons are for uploading the genome assembly file and the AR gene database file. Both files need to be in FASTA format. 
-The ‘Identify resistance genes’ button starts the actual AR gene annotation process. The output will appear in the top right output window.
+One needs to enter a sequence similarity percentage value that serves as cut-off for detecting potential new variants of AR genes. A value between 80 and 99% is recommended.
+The ‘Identify resistance genes’ button starts the actual AR gene annotation process. The genes will be listed in the the second output window.
 
 **AR gene output**
 
-The top right output window displays the AR resistance genes and porins that are identified on your input genome assembly. Each output line contains five fields, separated by a tab:
+The second output window displays the AR resistance genes and porins that are identified on your input genome assembly. Each output line contains five fields, separated by a tab:
 
 1.	The AR gene name
 2.	The contig, scaffold or chromosome where the AR gene is located
@@ -81,26 +80,24 @@ The top right output window displays the AR resistance genes and porins that are
 4.	Alignment length
 5.	AR gene length
 
-First, SSTAR lists the potential new alleles or variants at the top of the window. These are the variants that share between 95 and 99.99% sequence similarity with an AR gene in the used database. 
+First, SSTAR lists the potential new alleles or variants at the top of the window. These are the variants that share between X% and 99.99% sequence similarity with an AR gene in the used database. The user is free to pick a value for X.
 Below the potential new variants SSTAR lists the AR genes that share 100% sequence similarity with AR genes in the used database. The alignment length shows the user how much of the AR database gene is found on your genome. In other words, when the alignment length equals the gene length one identified the full AR gene with 100% sequence similarity. 
+**The export button will export the data as a tab delimited file and can then be opened in a spreadsheet, such as Microsoft Excel. The file is saved in the same directory as the input genome assembly file**
 
 **Detecting new and truncated AR gene variants**
 
-The bottom left output window will show putative new variants and truncated enzymes in protein space. The protein sequences can be exported to a plain text file using the “Export potentially new enzyme(s)” button. The file is saved in the same directory as the input genome assembly file. 
+The bottom output window will show putative new variants and truncated enzymes in protein space. The protein sequences can be exported to a plain text file, in FASTA format, using the export button. The file is saved in the same directory as the input genome assembly file. 
 The protein file can be used with BLASTP against the NR database of NCBI for detecting new variants. Potential novel beta-lactamase proteins can be submitted to the NCBI (http://www.ncbi.nlm.nih.gov/pathogens/submit_beta_lactamase/) for verification. 
 When a protein sequence contains an internal stop codon it will be flagged underneath the FASTA header of that particular protein. This makes the FASTA file invalid and forces the user to remove that sequence from the file. Protein sequences with internal stop codons are otherwise easily missed and misinterpreted as putative new variants of an AR gene group.
 
 **Detecting modified and truncated outer membrane porin sequences**
 
-The bottom left output window will also show modified and/or truncated outer membrane porins (OMPs). We have included OmpK35, OmpK36 and OmpK37 from Klebsiella pneumoniae, OmpC and OmpF from Escherichia coli, OmpC and OmpF from Enterobacter cloacae and Omp35 and Omp36 from Enterobacter earogenes. 
+The bottom output window will also show modified and/or truncated outer membrane porins (OMPs). We have included OmpK35, OmpK36 and OmpK37 from Klebsiella pneumoniae, OmpC and OmpF from Escherichia coli, OmpC and OmpF from Enterobacter cloacae and Omp35 and Omp36 from Enterobacter earogenes. 
 When a porin protein sequence contains an internal stop codon it will be flagged underneath the FASTA header of that particular porin as truncated. 
 
-Output files produced by SSTAR
+BLAST output file produced by SSTAR
 ------------------------------
-The results that are generated by SSTAR are shown in the graphical interface as explained in the previous section, however SSTAR is also producing several files in the same folder as your input data:
-
-1.	Three BLASTN database files, created from your genome assembly input file, with extensions .nin, .nhr and .nsq
-2.	A plain text file called ‘BLASTN’. This file contains the raw BLASTN results, including non-significant or below the threshold results that didn’t make it to the SSTAR graphical interface 
+The results that are generated by SSTAR are shown in the graphical interface as explained in the previous section, however SSTAR is also producing a raw BLASTN file in the same folder as your input data:
 
 The BLASTN file is in tabular form and each line represents an allele that was part of your query database. A line contains 13 fields and are briefly described here:
 
@@ -122,8 +119,8 @@ The BLASTN file is in tabular form and each line represents an allele that was p
 Planned features
 ----------------
 1.	Multiple genome assembly file upload (multithreading)
-2.	User defined input for % identity and AR gene coverage
-3.	Compatibility with other BLAST+ versions
+2.	Compatibility with other BLAST+ versions
+3.	An eraser button for all three output windows
 
 Citing SSTAR
 ------------
