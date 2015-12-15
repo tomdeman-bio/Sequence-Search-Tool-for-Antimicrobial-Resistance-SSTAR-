@@ -339,11 +339,11 @@ public class SSTAR extends JFrame implements ActionListener {
 			try {
 				if (!newPath2.equals("")) {
 					outFasta = new PrintWriter (
-							new FileWriter (newPath2+"STARzymes_" + fileName + ".txt", true));
+							new FileWriter (newPath2+"SSTARzymes_" + fileName + ".txt", true));
 					outFasta.print(proteinSeqOutput.getText());
 					outFasta.close();
 					outTabular = new PrintWriter (
-							new FileWriter (newPath2+"fileName" + ".genes_tab_separated.txt", true));
+							new FileWriter (newPath2+ fileName + ".genes_tab_separated.txt", true));
 					outTabular.print(enzymeOutput.getText());
 					outTabular.close();
 					JOptionPane.showMessageDialog(null, "Protein sequences and gene listing exported to files");
