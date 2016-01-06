@@ -125,6 +125,7 @@ Planned features
 3.	An eraser button for all three output windows
 4.	A method to use two AR gene databases (ResFinder and ARG-ANNOT) simultaneously
 5.	Add HMMER functionality for detecting new genes
+6.	Build a command line version of SSTAR for Linux and OS X
 
 Citing SSTAR
 ------------
