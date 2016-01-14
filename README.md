@@ -129,8 +129,8 @@ Planned features
 
 Citing SSTAR
 ------------
-Manuscript submitted! 
-Please cite "https://github.com/tomdeman-bio/Sequence-Search-Tool-for-Antimicrobial-Resistance-SSTAR-" for now.
+**Please cite our paper in mSphere:** de Man TJB, Limbago BM. 2016. SSTAR, a stand-alone easy-to-use antimicrobial resistance gene predictor.
+mSphere 1(1): e00050-15
 
 Contact
 -------
