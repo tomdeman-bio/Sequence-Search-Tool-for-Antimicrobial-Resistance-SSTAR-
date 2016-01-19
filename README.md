@@ -132,6 +132,12 @@ Citing SSTAR
 **Please cite our paper in mSphere:** de Man TJB, Limbago BM. 2016. SSTAR, a stand-alone easy-to-use antimicrobial resistance gene predictor.
 mSphere 1(1): e00050-15
 
+**When using the ARG-ANNOT database please also cite:** Gupta SK, Padmanabhan BR, Diene SM, Lopez-Rojas R, Kempf M, Landraud L, Rolain J-M. 2014. ARG-ANNOT (Antibiotic Resistance Gene-ANNOTation), a new bioinformatic tool to discover antibiotic resistance genes in bacterial genomes. 
+Antimicrobial Agents and Chemotherapy 58:212–220.
+
+**When using the ResFinder database please also cite:** Zankari E, Hasman H, Cosentino S, Vestergaard M, Rasmussen S, Lund O, Aarestrup F, Larsen MV. 2012. Identification of acquired antimicrobial resistance genes. 
+Journal of Antimicrobial Chemotherapy 67:2640–2644.
+
 Contact
 -------
 For assistance, feedback or suggestions please contact Tom de Man via xku6@cdc.gov or tjb.deman@gmail.com
