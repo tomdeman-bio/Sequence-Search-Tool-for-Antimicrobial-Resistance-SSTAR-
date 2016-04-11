@@ -89,7 +89,7 @@ Below the potential new variants SSTAR lists the AR genes that share 100% sequen
 
 The bottom output window will show putative new variants and truncated enzymes in protein space. The protein sequences can be exported to a plain text file, in FASTA format, using the export button. The file is saved in the same directory as the input genome assembly file. 
 The protein file can be used with BLASTP against the NR database of NCBI for detecting new variants. Potential novel beta-lactamase proteins can be submitted to the NCBI (http://www.ncbi.nlm.nih.gov/pathogens/submit_beta_lactamase/) for verification. 
-Translated start codons (Methionines, M) are capitalized so the user gets a better idea where the protein starts. Sometimes BLAST starts to align before the actual gene, and therefore a capital M can aid in detecting the start of your gene of interest. 
+Translated start codons (Methionines, M) are capitalized so the user gets a better idea where the protein starts. Not all proteins start with an M, however in that case SSTAR will report the ORF with the fewest internal stop codons. 
 When a protein sequence contains an internal stop codon it will be flagged underneath the FASTA header of that particular protein. This makes the FASTA file invalid and forces the user to remove that sequence from the file. Protein sequences with internal stop codons are otherwise easily missed and misinterpreted as putative new variants of an AR gene group.
 
 **Detecting modified and truncated outer membrane porin sequences**
