@@ -42,7 +42,11 @@ In order to run SSTAR you need Java Runtime Environment (JRE) 6 or newer and sta
 * BLAST+ needs to be installed in C:\\Program Files\\NCBI\\blast-2.2.29+, C:\\Program Files\\NCBI\\blast-2.2.30+ or C:\\Program Files\\NCBI\\blast-2.2.31+, which are the default locations after following the BLAST installation steps in the installation wizard
 
 **For OS X and Linux users**
-* BLAST+ needs to be installed in /usr/local/ncbi/blast/bin. One can also place links in /usr/local/ncbi/blast/bin using the “ln –s” command if BLAST+ is installed elsewhere
+* BLAST+ can be installed anywhere. Please add the two lines listed below to your **.bash_profile**
+```bash
+    export BLASTN="blastn"
+    export MAKEBLASTDB="makeblastdb"
+```
 
 **For all users**
 * Java can be downloaded from the Oracle website at: https://java.com/en/download/index.jsp
@@ -121,7 +125,7 @@ The BLASTN file is in tabular form and each line represents an allele that was p
 Planned features
 ----------------
 1.	Multiple genome assembly file upload (multithreading)
-2.	Compatibility with other BLAST+ versions
+2.	Compatibility with other BLAST+ versions (Windows version only, Unix version works with all BLAST versions already)
 3.	An eraser button for all three output windows
 4.	A method to use two AR gene databases (ResFinder and ARG-ANNOT) simultaneously
 5.	Add HMMER functionality for detecting new genes
