@@ -72,7 +72,7 @@ public class SSTAR_windows extends JFrame implements ActionListener {
 	
 	public SSTAR_windows () {
 		
-		super("SSTAR for Windows v1.0");
+		super("SSTAR for Windows v1.1");
 		
 		Container window = getContentPane();
 		window.setLayout(new BorderLayout());
@@ -213,128 +213,188 @@ public class SSTAR_windows extends JFrame implements ActionListener {
 		ArrayList<String> blastOutput = new ArrayList<String>();
 		
 		if (event.getSource() == geneDetectButton) {
-			try {
 					
-					assembly_path = assemblySelection.getText();
-					enzyme_path = enzymeSelection.getText();
-					showAssemblyPath = String.format("Your genome assembly is located at %s", assembly_path);
-					if (assembly_path != null && assembly_path.length() != 0) {
-						progessOutput.append(showAssemblyPath + newLine);
-					}
-					//remove file from assembly path
-					ArrayList<String> assembly_pathNoFile = new ArrayList<String>(Arrays.asList(assembly_path.split("\\\\")));
-					assembly_pathNoFile.remove(assembly_pathNoFile.size()-1);
-					StringBuffer restorePath = new StringBuffer();
-					for (int i = 0; i < assembly_pathNoFile.size(); i++) {
-						restorePath.append(assembly_pathNoFile.get(i));
-						restorePath.append("\\");
-					}
-					newPath = restorePath.toString();
+				assembly_path = assemblySelection.getText();
+				enzyme_path = enzymeSelection.getText();
+				showAssemblyPath = String.format("Your genome assembly is located at %s", assembly_path);
+				if (assembly_path != null && assembly_path.length() != 0) {
+					progessOutput.append(showAssemblyPath + newLine);
+				}
+				//remove file from assembly path
+				ArrayList<String> assembly_pathNoFile = new ArrayList<String>(Arrays.asList(assembly_path.split("\\\\")));
+				assembly_pathNoFile.remove(assembly_pathNoFile.size()-1);
+				StringBuffer restorePath = new StringBuffer();
+				for (int i = 0; i < assembly_pathNoFile.size(); i++) {
+					restorePath.append(assembly_pathNoFile.get(i));
+					restorePath.append("\\");
+				}
+				newPath = restorePath.toString();
 					
-					//turn assembly into BLAST database
-					if (assembly_path != null && assembly_path.length() != 0 && enzyme_path != null && enzyme_path.length() != 0) {
-						if (newPath != null && newPath.length() != 0) {
-							progessOutput.append("Current working directory: " + newPath + newLine);
-							progessOutput.append("Building BLAST database......" + newLine);
+				//turn assembly into BLAST database
+				if (assembly_path != null && assembly_path.length() != 0 && enzyme_path != null && enzyme_path.length() != 0) {
+					if (newPath != null && newPath.length() != 0) {
+						progessOutput.append("Current working directory: " + newPath + newLine);
+						progessOutput.append("Building BLAST database......" + newLine);
 							
-							//check if makeblastdb is available on your system
-							File myBlastdb1 = new File ("C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\makeblastdb.exe");
-							boolean isThereDB1 = myBlastdb1.exists( );
-							File myBlastdb2 = new File ("C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\makeblastdb.exe");
-							boolean isThereDB2 = myBlastdb2.exists( );
-							File myBlastdb3 = new File ("C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\makeblastdb.exe");
-							boolean isThereDB3 = myBlastdb3.exists( );
-							if (isThereDB1) {
-								dbBuild = String.format("\"C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\makeblastdb.exe\" -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
-								Process p = Runtime.getRuntime().exec (dbBuild);
+						//check if makeblastdb is available on your system
+						File myBlastdb1 = new File ("C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\makeblastdb.exe");
+						boolean isThereDB1 = myBlastdb1.exists( );
+						File myBlastdb2 = new File ("C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\makeblastdb.exe");
+						boolean isThereDB2 = myBlastdb2.exists( );
+						File myBlastdb3 = new File ("C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\makeblastdb.exe");
+						boolean isThereDB3 = myBlastdb3.exists( );
+						if (isThereDB1) {
+							dbBuild = String.format("\"C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\makeblastdb.exe\" -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
+							Process p = null;
+							try {
+								p = Runtime.getRuntime().exec (dbBuild);
+							} catch (IOException e) {
+								progessOutput.append("Building BLAST database failed......" + newLine);
+								e.printStackTrace();
+							}
+							try {
 								p.waitFor ();
-							} else if (isThereDB2) {
-								dbBuild = String.format("\"C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\makeblastdb.exe\" -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
-								Process p = Runtime.getRuntime().exec (dbBuild);
+							} catch (InterruptedException e) {
+								progessOutput.append("Building BLAST database failed......" + newLine);
+								e.printStackTrace();
+							}
+						} else if (isThereDB2) {
+							dbBuild = String.format("\"C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\makeblastdb.exe\" -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
+							Process p = null;
+							try {
+								p = Runtime.getRuntime().exec (dbBuild);
+							} catch (IOException e) {
+								progessOutput.append("Building BLAST database failed......" + newLine);
+								e.printStackTrace();
+							}
+							try {
 								p.waitFor ();
-							} else if (isThereDB3) {
-								 dbBuild = String.format("\"C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\makeblastdb.exe\" -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
-								Process p = Runtime.getRuntime().exec (dbBuild);
+							} catch (InterruptedException e) {
+								progessOutput.append("Building BLAST database failed......" + newLine);
+								e.printStackTrace();
+							}
+						} else if (isThereDB3) {
+							dbBuild = String.format("\"C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\makeblastdb.exe\" -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
+							Process p = null;
+							try {
+								p = Runtime.getRuntime().exec (dbBuild);
+							} catch (IOException e) {
+								progessOutput.append("Building BLAST database failed......" + newLine);
+								e.printStackTrace();
+							}
+							try {
 								p.waitFor ();
-							}
-							else {
-								progessOutput.append("Cannot find makeblastdb!!!... is it installed?" + newLine);
-							}
-							//run a BLASTN against your custom BLAST database
-							progessOutput.append("Performing a BLASTN run......" + newLine);
-							String[] cmd = new String[13];
-							//check if BLASTN is available on your system
-							File myBlast1 = new File ("C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\blastn.exe");
-							boolean isThereBlast1 = myBlast1.exists( );
-							File myBlast2 = new File ("C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\blastn.exe");
-							boolean isThereBlast2 = myBlast2.exists( );
-							File myBlast3 = new File ("C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\blastn.exe");
-							boolean isThereBlast3 = myBlast3.exists( );
-							if (isThereBlast1) {
-								cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\blastn.exe\"";
-							} else if (isThereBlast2) {
-								cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\blastn.exe\"";
-							} else if (isThereBlast3) {
-								cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\blastn.exe\"";
-							}
-							else {
-								progessOutput.append("Cannot find BLASTN!!!... is it installed?" + newLine);
-							}
-							cmd[1] = "-query";
-							cmd[2] = enzyme_path;
-							cmd[3] = "-db";
-							cmd[4] = newPath+"blastDB";
-							cmd[5] = "-outfmt";
-							cmd[6] = "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen";
-							cmd[7] = "-evalue";
-							cmd[8] = "1e-5";
-							cmd[9] = "-out";
-							cmd[10] = newPath+"BLASTN";
-							cmd[11] = "-max_target_seqs";
-							cmd[12] = "1";
-							if (seqId.getText().trim().length() == 0) {
-								JOptionPane.showMessageDialog(null,"No sequence similarity value inserted" + newLine);
-								//remove the BLAST database files to save disk space
-								removeDB = String.format("cmd /c del %sblastDB.nhr %sblastDB.nin %sblastDB.nsq", newPath, newPath, newPath);
-								Process p3 = Runtime.getRuntime().exec (removeDB);
-								p3.waitFor ();
-							}
-							else {
-								cutOff = Double.parseDouble(seqId.getText());
-								Process p2 = Runtime.getRuntime().exec (cmd);
-								p2.waitFor ();
-								progessOutput.append("Your BLASTN run has finished!!!" + newLine);	
-								progessOutput.append("Going over your raw BLAST output now...." + newLine);
-								
-								//remove the BLAST database files to save disk space
-								removeDB = String.format("cmd /c del %sblastDB.nhr %sblastDB.nin %sblastDB.nsq", newPath, newPath, newPath);
-								Process p4 = Runtime.getRuntime().exec (removeDB);
-								p4.waitFor ();
-								
-								//call method for parsing BLAST output 
-								blastOutput = parseBlast(newPath);
-								progessOutput.append("Presenting your filtered BLAST data...." + newLine);
-								
-								for (int i = 0; i < blastOutput.size(); i = i+5) {
-									enzymeOutput.append(blastOutput.get(i) + tab);
-									enzymeOutput.append(blastOutput.get(i+1) + tab);
-									enzymeOutput.append(blastOutput.get(i+2) + "%" + tab);
-									enzymeOutput.append(blastOutput.get(i+3) + tab);
-									enzymeOutput.append(blastOutput.get(i+4) + newLine);
-								}
+							} catch (InterruptedException e) {
+								progessOutput.append("Building BLAST database failed......" + newLine);
+								e.printStackTrace();
 							}
 						}
 						else {
-							JOptionPane.showMessageDialog(null,"Cannot find your working directory, using the wrong SSTAR version?" + newLine);
+							progessOutput.append("Cannot find makeblastdb!!!... is it installed?" + newLine);
 						}
-					} else {
-						JOptionPane.showMessageDialog(null,"No input files!!" + newLine);
+						//run a BLASTN against your custom BLAST database
+						progessOutput.append("Performing a BLASTN run......" + newLine);
+						String[] cmd = new String[13];
+						//check if BLASTN is available on your system
+						File myBlast1 = new File ("C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\blastn.exe");
+						boolean isThereBlast1 = myBlast1.exists( );
+						File myBlast2 = new File ("C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\blastn.exe");
+						boolean isThereBlast2 = myBlast2.exists( );
+						File myBlast3 = new File ("C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\blastn.exe");
+						boolean isThereBlast3 = myBlast3.exists( );
+						if (isThereBlast1) {
+							cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\blastn.exe\"";
+						} else if (isThereBlast2) {
+							cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\blastn.exe\"";
+						} else if (isThereBlast3) {
+							cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\blastn.exe\"";
+						}
+						else {
+							progessOutput.append("Cannot find BLASTN!!!... is it installed?" + newLine);
+						}
+						cmd[1] = "-query";
+						cmd[2] = enzyme_path;
+						cmd[3] = "-db";
+						cmd[4] = newPath+"blastDB";
+						cmd[5] = "-outfmt";
+						cmd[6] = "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen";
+						cmd[7] = "-evalue";
+						cmd[8] = "1e-5";
+						cmd[9] = "-out";
+						cmd[10] = newPath+"BLASTN";
+						cmd[11] = "-max_target_seqs";
+						cmd[12] = "1";
+						if (seqId.getText().trim().length() == 0) {
+							JOptionPane.showMessageDialog(null,"No sequence similarity value inserted" + newLine);
+							//remove the BLAST database files to save disk space
+							removeDB = String.format("cmd /c del %sblastDB.nhr %sblastDB.nin %sblastDB.nsq", newPath, newPath, newPath);
+							Process p3 = null;
+							try {
+								p3 = Runtime.getRuntime().exec (removeDB);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							try {
+								p3.waitFor ();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+						else {
+							cutOff = Double.parseDouble(seqId.getText());
+							Process p2 = null;
+							try {
+								p2 = Runtime.getRuntime().exec (cmd);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							try {
+								p2.waitFor ();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+							progessOutput.append("Your BLASTN run has finished!!!" + newLine);	
+							progessOutput.append("Going over your raw BLAST output now...." + newLine);
+								
+							//remove the BLAST database files to save disk space
+							removeDB = String.format("cmd /c del %sblastDB.nhr %sblastDB.nin %sblastDB.nsq", newPath, newPath, newPath);
+							Process p4 = null;
+							try {
+								p4 = Runtime.getRuntime().exec (removeDB);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							try {
+								p4.waitFor ();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+								
+							//call method for parsing BLAST output 
+							try {
+								blastOutput = parseBlast(newPath);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							progessOutput.append("Presenting your filtered BLAST data...." + newLine);
+								
+							for (int i = 0; i < blastOutput.size(); i = i+5) {
+								enzymeOutput.append(blastOutput.get(i) + tab);
+								enzymeOutput.append(blastOutput.get(i+1) + tab);
+								enzymeOutput.append(blastOutput.get(i+2) + "%" + tab);
+								enzymeOutput.append(blastOutput.get(i+3) + tab);
+								enzymeOutput.append(blastOutput.get(i+4) + newLine);
+							}
+						}
 					}
+					else {
+						JOptionPane.showMessageDialog(null,"Cannot find your working directory, using the wrong SSTAR version?" + newLine);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null,"No input files!!" + newLine);
 				}
-			catch (Exception e) {
-				progessOutput.append("Error: " + e.getMessage());
-			}
 		}
+
 		if (event.getSource() == exportButton) {
 			String assemblyPath2 = "";
 			String newPath2 = "";

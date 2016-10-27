@@ -1,4 +1,4 @@
-Manual for Sequence Search Tool for Antimicrobial Resistance (SSTAR), version 1.0
+Manual for Sequence Search Tool for Antimicrobial Resistance (SSTAR), version 1.1
 =================================================================================
 
 Table of Contents

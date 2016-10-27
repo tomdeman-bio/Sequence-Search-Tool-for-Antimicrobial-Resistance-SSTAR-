@@ -72,7 +72,7 @@ public class SSTAR extends JFrame implements ActionListener {
 	
 	public SSTAR () {
 		
-		super("SSTAR v1.0");
+		super("SSTAR v1.1");
 		
 		Container window = getContentPane();
 		window.setLayout(new BorderLayout());
