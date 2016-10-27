@@ -197,7 +197,7 @@ public class SSTAR extends JFrame implements ActionListener {
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-	@SuppressWarnings("static-access")
+	@SuppressWarnings({ "static-access", "unused" })
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		int reply;
@@ -213,106 +213,137 @@ public class SSTAR extends JFrame implements ActionListener {
 		ArrayList<String> blastOutput = new ArrayList<String>();
 		
 		if (event.getSource() == geneDetectButton) {
-			try {
 					
-					assembly_path = assemblySelection.getText();
-					enzyme_path = enzymeSelection.getText();
-					showAssemblyPath = String.format("Your genome assembly is located at %s", assembly_path);
-					if (assembly_path != null && assembly_path.length() != 0) {
-						progessOutput.append(showAssemblyPath + newLine);
-					}
-					//remove file from assembly path
-					ArrayList<String> assembly_pathNoFile = new ArrayList<String>(Arrays.asList(assembly_path.split("/")));
-					assembly_pathNoFile.remove(assembly_pathNoFile.size()-1);
-					StringBuffer restorePath = new StringBuffer();
-					for (int i = 0; i < assembly_pathNoFile.size(); i++) {
-						restorePath.append(assembly_pathNoFile.get(i));
-						restorePath.append("/");
-					}
-					newPath = restorePath.toString();
+				assembly_path = assemblySelection.getText();
+				enzyme_path = enzymeSelection.getText();
+				showAssemblyPath = String.format("Your genome assembly is located at %s", assembly_path);
+				if (assembly_path != null && assembly_path.length() != 0) {
+					progessOutput.append(showAssemblyPath + newLine);
+				}
+				//remove file from assembly path
+				ArrayList<String> assembly_pathNoFile = new ArrayList<String>(Arrays.asList(assembly_path.split("/")));
+				assembly_pathNoFile.remove(assembly_pathNoFile.size()-1);
+				StringBuffer restorePath = new StringBuffer();
+				for (int i = 0; i < assembly_pathNoFile.size(); i++) {
+					restorePath.append(assembly_pathNoFile.get(i));
+					restorePath.append("/");
+				}
+				newPath = restorePath.toString();
 					
-					//turn assembly into BLAST database
-					if (assembly_path != null && assembly_path.length() != 0 && enzyme_path != null && enzyme_path.length() != 0) {
-						if (newPath != null && newPath.length() != 0) {
-							progessOutput.append("Current working directory: " + newPath + newLine);
-							progessOutput.append("Building BLAST database......" + newLine);
+				//turn assembly into BLAST database
+				if (assembly_path != null && assembly_path.length() != 0 && enzyme_path != null && enzyme_path.length() != 0) {
+					if (newPath != null && newPath.length() != 0) {
+						progessOutput.append("Current working directory: " + newPath + newLine);
+						progessOutput.append("Building BLAST database......" + newLine);
 							
-							//check if makeblastdb is available on your system
-							File myBlastdb = new File ("/usr/local/ncbi/blast/bin/makeblastdb");
-							boolean isThereDB = myBlastdb.exists( );
-							if (isThereDB) {
-								dbBuild = String.format("/usr/local/ncbi/blast/bin/makeblastdb -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
+						//check if makeblastdb is available on your system as system variable (in .bash_profile or .bashrc)
+						try {
+							String javaMakedb = System.getenv("MAKEBLASTDB");
+							if (javaMakedb.equals("makeblastdb")) {
+								dbBuild = String.format("makeblastdb -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
 								Process p = Runtime.getRuntime().exec (dbBuild);
 								p.waitFor ();
-							} else {
-								progessOutput.append("Cannot find makeblastdb!!!... is it installed?" + newLine);
 							}
-							//run a BLASTN against your custom BLAST database
-							progessOutput.append("Performing a BLASTN run......" + newLine);
-							String[] cmd = new String[13];
-							//check if BLASTN is available on your system
-							File myBlast = new File ("/usr/local/ncbi/blast/bin/blastn");
-							boolean isThereBlast = myBlast.exists( );
-							if (isThereBlast) {
-								cmd[0] = "/usr/local/ncbi/blast/bin/blastn";
-							} else {
-								progessOutput.append("Cannot find BLASTN!!!... is it installed?" + newLine);
+						}
+						catch (Exception e) {
+							progessOutput.append("ERROR: makeblastdb is not set as system variable" + newLine);
+						}	
+						//run a BLASTN against your custom BLAST database
+						progessOutput.append("Performing a BLASTN run......" + newLine);
+						String[] cmd = new String[13];
+						//check if BLASTN is available on your system as system variable (in .bash_profile or .bashrc)
+						try {
+							String javaBlastn = System.getenv("BLASTN");
+							if (javaBlastn.equals("blastn")) {
+								cmd[0] = javaBlastn;
 							}
-							cmd[1] = "-query";
-							cmd[2] = enzyme_path;
-							cmd[3] = "-db";
-							cmd[4] = newPath+"blastDB";
-							cmd[5] = "-outfmt";
-							cmd[6] = "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen";
-							cmd[7] = "-evalue";
-							cmd[8] = "1e-5";
-							cmd[9] = "-out";
-							cmd[10] = newPath+"BLASTN";
-							cmd[11] = "-max_target_seqs";
-							cmd[12] = "1";
-							if (seqId.getText().trim().length() == 0) {
-								JOptionPane.showMessageDialog(null,"No sequence similarity value inserted" + newLine);
-								//remove the BLAST database files to save disk space
-								removeDB = String.format("rm %sblastDB.nhr %sblastDB.nin %sblastDB.nsq", newPath, newPath, newPath);
-								Process p3 = Runtime.getRuntime().exec (removeDB);
+						}
+						catch (Exception e) {
+							progessOutput.append("ERROR: blastn is not set as system variable" + newLine);
+						}
+						cmd[1] = "-query";
+						cmd[2] = enzyme_path;
+						cmd[3] = "-db";
+						cmd[4] = newPath+"blastDB";
+						cmd[5] = "-outfmt";
+						cmd[6] = "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen";
+						cmd[7] = "-evalue";
+						cmd[8] = "1e-5";
+						cmd[9] = "-out";
+						cmd[10] = newPath+"BLASTN";
+						cmd[11] = "-max_target_seqs";
+						cmd[12] = "1";
+						if (seqId.getText().trim().length() == 0) {
+							JOptionPane.showMessageDialog(null,"No sequence similarity value inserted" + newLine);
+							//remove the BLAST database files to save disk space
+							removeDB = String.format("rm %sblastDB.nhr %sblastDB.nin %sblastDB.nsq", newPath, newPath, newPath);
+							Process p3 = null;
+							try {
+								p3 = Runtime.getRuntime().exec (removeDB);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							try {
 								p3.waitFor ();
-							}
-							else {
-								cutOff = Double.parseDouble(seqId.getText());
-								Process p2 = Runtime.getRuntime().exec (cmd);
-								p2.waitFor ();
-								progessOutput.append("Your BLASTN run has finished!!!" + newLine);	
-								progessOutput.append("Going over your raw BLAST output now...." + newLine);
-								
-								//remove the BLAST database files to save disk space
-								removeDB = String.format("rm %sblastDB.nhr %sblastDB.nin %sblastDB.nsq", newPath, newPath, newPath);
-								Process p4 = Runtime.getRuntime().exec (removeDB);
-								p4.waitFor ();
-								
-								//call method for parsing BLAST output 
-								blastOutput = parseBlast(newPath);
-								progessOutput.append("Presenting your filtered BLAST data...." + newLine);
-								
-								for (int i = 0; i < blastOutput.size(); i = i+5) {
-									enzymeOutput.append(blastOutput.get(i) + tab);
-									enzymeOutput.append(blastOutput.get(i+1) + tab);
-									enzymeOutput.append(blastOutput.get(i+2) + "%" + tab);
-									enzymeOutput.append(blastOutput.get(i+3) + tab);
-									enzymeOutput.append(blastOutput.get(i+4) + newLine);
-								}
+							} catch (InterruptedException e) {
+								e.printStackTrace();
 							}
 						}
 						else {
-							JOptionPane.showMessageDialog(null,"Cannot find your working directory, using the wrong SSTAR version?" + newLine);
+							cutOff = Double.parseDouble(seqId.getText());
+							Process p2 = null;
+							try {
+								p2 = Runtime.getRuntime().exec (cmd);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							try {
+								p2.waitFor ();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+							progessOutput.append("Your BLASTN run has finished!!!" + newLine);	
+							progessOutput.append("Going over your raw BLAST output now...." + newLine);
+								
+							//remove the BLAST database files to save disk space
+							removeDB = String.format("rm %sblastDB.nhr %sblastDB.nin %sblastDB.nsq", newPath, newPath, newPath);
+							Process p4 = null;
+							try {
+								p4 = Runtime.getRuntime().exec (removeDB);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							try {
+								p4.waitFor ();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+								
+							//call method for parsing BLAST output 
+							try {
+								blastOutput = parseBlast(newPath);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							progessOutput.append("Presenting your filtered BLAST data...." + newLine);
+								
+							for (int i = 0; i < blastOutput.size(); i = i+5) {
+								enzymeOutput.append(blastOutput.get(i) + tab);
+								enzymeOutput.append(blastOutput.get(i+1) + tab);
+								enzymeOutput.append(blastOutput.get(i+2) + "%" + tab);
+								enzymeOutput.append(blastOutput.get(i+3) + tab);
+								enzymeOutput.append(blastOutput.get(i+4) + newLine);
+							}
 						}
-					} else {
-						JOptionPane.showMessageDialog(null,"No input files!!" + newLine);
 					}
+					else {
+						JOptionPane.showMessageDialog(null,"Cannot find your working directory, using the wrong SSTAR version?" + newLine);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null,"No input files!!" + newLine);
 				}
-			catch (Exception e) {
-				progessOutput.append("Error: " + e.getMessage());
-			}
 		}
+			
 		if (event.getSource() == exportButton) {
 			String assemblyPath2 = "";
 			String newPath2 = "";
