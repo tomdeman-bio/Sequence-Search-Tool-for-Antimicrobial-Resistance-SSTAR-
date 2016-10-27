@@ -36,7 +36,8 @@ Two SSTAR versions
 Obtaining and installing SSTAR dependencies
 -------------------------------------------
 SSTAR combines a standalone BLASTN with a Java interface, which operates under Windows and Unix systems. 
-In order to run SSTAR you need Java Runtime Environment (JRE) 6 or newer and standalone BLAST 2.2.29+, BLAST 2.2.30+ or BLAST 2.2.31+ installed on your system. 
+In order to run SSTAR under Windows you need Java Runtime Environment (JRE) 6 or newer and standalone BLAST 2.2.29+, BLAST 2.2.30+ or BLAST 2.2.31+. 
+SSTAR for Linux and OS X is compatible with JRE6 or newer and all BLAST+ versions.
 
 **For Windows users**
 * BLAST+ needs to be installed in C:\\Program Files\\NCBI\\blast-2.2.29+, C:\\Program Files\\NCBI\\blast-2.2.30+ or C:\\Program Files\\NCBI\\blast-2.2.31+, which are the default locations after following the BLAST installation steps in the installation wizard
