@@ -43,11 +43,27 @@ SSTAR for Linux and OS X is compatible with JRE6 or newer and all BLAST+ version
 * BLAST+ needs to be installed in C:\\Program Files\\NCBI\\blast-2.2.29+, C:\\Program Files\\NCBI\\blast-2.2.30+ or C:\\Program Files\\NCBI\\blast-2.2.31+, which are the default locations after following the BLAST installation steps in the installation wizard
 
 **For OS X and Linux users**
-* BLAST+ can be installed anywhere. Please add the two lines listed below to your **.bash_profile**
+* BLAST+ can be installed anywhere. Please add the two lines listed below to your **.bash_profile** or **.profile** depending on your shell, and operating system
 ```bash
     export BLASTN="blastn"
     export MAKEBLASTDB="makeblastdb"
 ```
+
+Load your **.bash_profile** or **.profile** into the current shell or command prompt
+
+```bash
+    source .bash_profile
+    OR
+    source .profile
+```
+
+You can check if your variables were exported correctly using the **echo** command and the commands should return "blastn" and "makeblastdb" 
+```bash
+    echo $BLASTN
+    echo $MAKEBLASTDB
+```
+
+
 
 **For all users**
 * Java can be downloaded from the Oracle website at: https://java.com/en/download/index.jsp
