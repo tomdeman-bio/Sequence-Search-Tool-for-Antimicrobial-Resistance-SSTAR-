@@ -40,10 +40,10 @@ In order to run SSTAR under Windows you need Java Runtime Environment (JRE) 6 or
 SSTAR for Linux and OS X is compatible with JRE6 or newer and all BLAST+ versions.
 
 **For Windows users**
-* BLAST+ needs to be installed in C:\\Program Files\\NCBI which is the default location when following the BLAST installation steps in the installation wizard. SSTAR for Windows is currently compatible with versions: 2.2.29+, 2.2.30+, 2.2.31+, 2.5.0+ and 2.6.0+
+* BLAST+ needs to be installed in **C:\\Program Files\\NCBI** which is the default location when following the BLAST installation steps in the installation wizard. SSTAR for Windows is currently compatible with BLAST versions: 2.2.29+, 2.2.30+, 2.2.31+, 2.5.0+ and 2.6.0+
 
 **For OS X and Linux users**
-* BLAST+ can be installed anywhere and is compatible with all BLAST+ versions, and needs to be added to your PATH variable. Please add the two lines listed below to your **.bash_profile** or **.profile** depending on your shell, and operating system
+* BLAST+ can be installed anywhere and SSTAR is compatible with all BLAST+ versions. BLAST+ needs to be added to your PATH variable. Additionally, please add the two lines listed below to your **.bash_profile** or **.profile** depending on your shell, and operating system
 ```bash
     export BLASTN="blastn"
     export MAKEBLASTDB="makeblastdb"
@@ -133,10 +133,10 @@ The BLASTN file is in tabular form and each line represents an allele that was p
 7. 	Start position in query 
 8. 	End position in query 
 9. 	Start position in target
-10. 	End position in target
-11. 	E-value 
-12. 	Bit score
-13. 	Query length 
+10. End position in target
+11. E-value 
+12. Bit score
+13. Query length 
 
 
 Planned features
