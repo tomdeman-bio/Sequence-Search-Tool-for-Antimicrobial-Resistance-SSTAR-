@@ -72,7 +72,7 @@ public class SSTAR extends JFrame implements ActionListener {
 	
 	public SSTAR () {
 		
-		super("SSTAR v1.1");
+		super("SSTAR v1.1.01");
 		
 		Container window = getContentPane();
 		window.setLayout(new BorderLayout());
@@ -514,8 +514,8 @@ public class SSTAR extends JFrame implements ActionListener {
 					colCount++;
 					newFamily = true;
 				}
-				
-				if (similarity.equals("100.00")) {
+				//add BLAST-2.5+ and BLAST-2.6+ compatibility
+				if (similarity.equals("100.00") || similarity.equals("100.000")) {
 					blastnfile = String.format("%s", variant);
 					enzymes.add(blastnfile);
 					enzymes.add(contig);

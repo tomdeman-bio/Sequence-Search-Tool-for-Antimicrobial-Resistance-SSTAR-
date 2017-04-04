@@ -1,5 +1,5 @@
-Manual for Sequence Search Tool for Antimicrobial Resistance (SSTAR), version 1.1
-=================================================================================
+Manual for Sequence Search Tool for Antimicrobial Resistance (SSTAR), version 1.1.01
+====================================================================================
 
 Table of Contents
 =================
@@ -40,10 +40,10 @@ In order to run SSTAR under Windows you need Java Runtime Environment (JRE) 6 or
 SSTAR for Linux and OS X is compatible with JRE6 or newer and all BLAST+ versions.
 
 **For Windows users**
-* BLAST+ needs to be installed in C:\\Program Files\\NCBI\\blast-2.2.29+, C:\\Program Files\\NCBI\\blast-2.2.30+ or C:\\Program Files\\NCBI\\blast-2.2.31+, which are the default locations after following the BLAST installation steps in the installation wizard
+* BLAST+ needs to be installed in C:\\Program Files\\NCBI which is the default location when following the BLAST installation steps in the installation wizard. SSTAR for Windows is currently compatible with versions: 2.2.29+, 2.2.30+, 2.2.31+, 2.5.0+ and 2.6.0+
 
 **For OS X and Linux users**
-* BLAST+ can be installed anywhere and needs to be added to your PATH variable. Please add the two lines listed below to your **.bash_profile** or **.profile** depending on your shell, and operating system
+* BLAST+ can be installed anywhere and is compatible with all BLAST+ versions, and needs to be added to your PATH variable. Please add the two lines listed below to your **.bash_profile** or **.profile** depending on your shell, and operating system
 ```bash
     export BLASTN="blastn"
     export MAKEBLASTDB="makeblastdb"

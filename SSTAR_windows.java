@@ -72,7 +72,7 @@ public class SSTAR_windows extends JFrame implements ActionListener {
 	
 	public SSTAR_windows () {
 		
-		super("SSTAR for Windows v1.1");
+		super("SSTAR for Windows v1.1.01");
 		
 		Container window = getContentPane();
 		window.setLayout(new BorderLayout());
@@ -243,6 +243,10 @@ public class SSTAR_windows extends JFrame implements ActionListener {
 						boolean isThereDB2 = myBlastdb2.exists( );
 						File myBlastdb3 = new File ("C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\makeblastdb.exe");
 						boolean isThereDB3 = myBlastdb3.exists( );
+						File myBlastdb4 = new File ("C:\\Program Files\\NCBI\\blast-2.5.0+\\bin\\makeblastdb.exe");
+						boolean isThereDB4 = myBlastdb4.exists( );
+						File myBlastdb5 = new File ("C:\\Program Files\\NCBI\\blast-2.6.0+\\bin\\makeblastdb.exe");
+						boolean isThereDB5 = myBlastdb5.exists( );
 						if (isThereDB1) {
 							dbBuild = String.format("\"C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\makeblastdb.exe\" -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
 							Process p = null;
@@ -288,6 +292,36 @@ public class SSTAR_windows extends JFrame implements ActionListener {
 								progessOutput.append("Building BLAST database failed......" + newLine);
 								e.printStackTrace();
 							}
+						} else if (isThereDB4) {
+							dbBuild = String.format("\"C:\\Program Files\\NCBI\\blast-2.5.0+\\bin\\makeblastdb.exe\" -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
+							Process p = null;
+							try {
+								p = Runtime.getRuntime().exec (dbBuild);
+							} catch (IOException e) {
+								progessOutput.append("Building BLAST database failed......" + newLine);
+								e.printStackTrace();
+							}
+							try {
+								p.waitFor ();
+							} catch (InterruptedException e) {
+								progessOutput.append("Building BLAST database failed......" + newLine);
+								e.printStackTrace();
+							}
+						} else if (isThereDB5) {
+							dbBuild = String.format("\"C:\\Program Files\\NCBI\\blast-2.6.0+\\bin\\makeblastdb.exe\" -in %s -out %sblastDB -dbtype nucl", assembly_path, newPath);    
+							Process p = null;
+							try {
+								p = Runtime.getRuntime().exec (dbBuild);
+							} catch (IOException e) {
+								progessOutput.append("Building BLAST database failed......" + newLine);
+								e.printStackTrace();
+							}
+							try {
+								p.waitFor ();
+							} catch (InterruptedException e) {
+								progessOutput.append("Building BLAST database failed......" + newLine);
+								e.printStackTrace();
+							}
 						}
 						else {
 							progessOutput.append("Cannot find makeblastdb!!!... is it installed?" + newLine);
@@ -302,12 +336,20 @@ public class SSTAR_windows extends JFrame implements ActionListener {
 						boolean isThereBlast2 = myBlast2.exists( );
 						File myBlast3 = new File ("C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\blastn.exe");
 						boolean isThereBlast3 = myBlast3.exists( );
+						File myBlast4 = new File ("C:\\Program Files\\NCBI\\blast-2.5.0+\\bin\\blastn.exe");
+						boolean isThereBlast4 = myBlast4.exists( );
+						File myBlast5 = new File ("C:\\Program Files\\NCBI\\blast-2.6.0+\\bin\\blastn.exe");
+						boolean isThereBlast5 = myBlast5.exists( );
 						if (isThereBlast1) {
 							cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.2.29+\\bin\\blastn.exe\"";
 						} else if (isThereBlast2) {
 							cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.2.30+\\bin\\blastn.exe\"";
 						} else if (isThereBlast3) {
 							cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.2.31+\\bin\\blastn.exe\"";
+						} else if (isThereBlast4) {
+							cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.5.0+\\bin\\blastn.exe\"";
+						} else if (isThereBlast5) {
+							cmd[0] = "\"C:\\Program Files\\NCBI\\blast-2.6.0+\\bin\\blastn.exe\"";
 						}
 						else {
 							progessOutput.append("Cannot find BLASTN!!!... is it installed?" + newLine);
@@ -565,8 +607,8 @@ public class SSTAR_windows extends JFrame implements ActionListener {
 					colCount++;
 					newFamily = true;
 				}
-				
-				if (similarity.equals("100.00")) {
+				//add BLAST-2.5+ and BLAST-2.6+ compatibility 
+				if (similarity.equals("100.00") || similarity.equals("100.000")) {
 					blastnfile = String.format("%s", variant);
 					enzymes.add(blastnfile);
 					enzymes.add(contig);
