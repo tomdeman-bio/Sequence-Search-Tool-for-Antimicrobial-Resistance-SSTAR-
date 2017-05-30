@@ -12,6 +12,7 @@ Table of Contents
   * [Running SSTAR](#running-sstar)
   * [BLAST output file produced by SSTAR](#blast-output-file-produced-by-sstar)
   * [Planned features](#planned-features)
+  * [FAQ](#faq)
   * [Citing SSTAR](#citing-sstar)
   * [Contact](#contact)
 
@@ -148,15 +149,27 @@ Planned features
 5.	Add HMMER functionality for detecting new genes
 6.	Build a command line version of SSTAR for Linux and OS X
 
+FAQ
+---
+1.	**SSTAR doesn’t like certain CLC Genomics Workbench assembly files. Why?**<br />
+	
+	CLC generates FASTA headers that contain spaces.<br /> 
+	Since all information immediately right of the first space is disregarded it can cause each contig/scaffold to have the exact same name as all the other contigs/scaffolds. 	This will cause issues during downstream analyses since SSTAR won’t be able to discern between the different contigs.<br />
+	The issue can be fixed by converting the FASTA headers to a “SSTAR-friendly” format using the split_fasta_header_on_space.pl script in the **Scripts** folder.
+	
+
 Citing SSTAR
 ------------
-**Please cite our paper in mSphere:** de Man TJB, Limbago BM. 2016. SSTAR, a stand-alone easy-to-use antimicrobial resistance gene predictor.
+**Please cite our paper in mSphere:**<br />
+de Man TJB, Limbago BM. 2016. SSTAR, a stand-alone easy-to-use antimicrobial resistance gene predictor.
 mSphere 1(1): e00050-15
 
-**When using the ARG-ANNOT database please also cite:** Gupta SK, Padmanabhan BR, Diene SM, Lopez-Rojas R, Kempf M, Landraud L, Rolain J-M. 2014. ARG-ANNOT (Antibiotic Resistance Gene-ANNOTation), a new bioinformatic tool to discover antibiotic resistance genes in bacterial genomes. 
+**When using the ARG-ANNOT database please also cite:**<br />
+Gupta SK, Padmanabhan BR, Diene SM, Lopez-Rojas R, Kempf M, Landraud L, Rolain J-M. 2014. ARG-ANNOT (Antibiotic Resistance Gene-ANNOTation), a new bioinformatic tool to discover antibiotic resistance genes in bacterial genomes. 
 Antimicrobial Agents and Chemotherapy 58:212–220.
 
-**When using the ResFinder database please also cite:** Zankari E, Hasman H, Cosentino S, Vestergaard M, Rasmussen S, Lund O, Aarestrup F, Larsen MV. 2012. Identification of acquired antimicrobial resistance genes. 
+**When using the ResFinder database please also cite:**<br /> 
+Zankari E, Hasman H, Cosentino S, Vestergaard M, Rasmussen S, Lund O, Aarestrup F, Larsen MV. 2012. Identification of acquired antimicrobial resistance genes. 
 Journal of Antimicrobial Chemotherapy 67:2640–2644.
 
 Contact
