@@ -8,6 +8,7 @@ Table of Contents
   * [Introduction](#introduction)
   * [Two SSTAR versions](#two-sstar-versions)
   * [Obtaining and installing SSTAR dependencies](#obtaining-and-installing-sstar-dependencies)
+  * [AR gene databases](#AR-gene-databases)
   * [Input data](#input-data)
   * [Running SSTAR](#running-sstar)
   * [BLAST output file produced by SSTAR](#blast-output-file-produced-by-sstar)
@@ -69,6 +70,11 @@ You can check if your variables were exported correctly using the **echo** comma
 **For all users**
 * Java can be downloaded from the Oracle website at: https://java.com/en/download/index.jsp
 * A BLAST+ copy and easy installation guide of standalone BLAST can be retrieved from: http://www.blaststation.com/freestuff/en/howtoNCBIBlastWin.html
+
+AR gene databases
+-----------------
+We generated an AR gene database from Resfinder and ARG-ANNOT data, called resGANNOT. Nucleotide genes were clustered using CD-HIT at 90% sequence similarity and redundant entries were discarded. 
+resGANNOT was created and maintained by **Nicholas Vlachos** (NVX4@cdc.gov)
 
 Input data
 ----------
