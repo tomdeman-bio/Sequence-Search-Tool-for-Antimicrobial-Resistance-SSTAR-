@@ -8,7 +8,7 @@ Table of Contents
   * [Introduction](#introduction)
   * [Two SSTAR versions](#two-sstar-versions)
   * [Obtaining and installing SSTAR dependencies](#obtaining-and-installing-sstar-dependencies)
-  * [AR gene databases](#AR-gene-databases)
+  * [AR gene databases](#ar-gene-databases)
   * [Input data](#input-data)
   * [Running SSTAR](#running-sstar)
   * [BLAST output file produced by SSTAR](#blast-output-file-produced-by-sstar)
