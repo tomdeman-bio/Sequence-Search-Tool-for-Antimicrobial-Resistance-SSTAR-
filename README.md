@@ -19,15 +19,15 @@ Table of Contents
 
 Introduction
 ------------
-SSTAR enables fast and accurate antimicrobial resistance (AR) surveillance from Whole Genome Sequencing (WGS) data. It is able to identify known AR genes and detect putative new variants as well as truncated genes due to internal stop codons. 
+SSTAR enables fast and accurate antimicrobial resistance (AR) surveillance from Whole Genome Sequencing (WGS) data. It is able to identify known AR genes and detect putative new variants as well as truncated genes due to internal stop codons.
 SSTAR also reports modifications and/or truncations in outer membrane porins.
 
 Two SSTAR versions
 -----------------------------------------------------------------
 **In your downloaded archive you will find two different SSTAR versions**
 
-1.	**SSTAR.jar** is for Linux and OS X 
-2.	**SSTAR_windows.jar** is for Windows 
+1.	**SSTAR.jar** is for Linux and OS X
+2.	**SSTAR_windows.jar** is for Windows
 
 **JAR and Java files**
 
@@ -37,8 +37,8 @@ Two SSTAR versions
 
 Obtaining and installing SSTAR dependencies
 -------------------------------------------
-SSTAR combines a standalone BLASTN with a Java interface, which operates under Windows and Unix systems. 
-In order to run SSTAR under Windows you need Java Runtime Environment (JRE) 6 or newer and standalone BLAST 2.2.29+, BLAST 2.2.30+ or BLAST 2.2.31+. 
+SSTAR combines a standalone BLASTN with a Java interface, which operates under Windows and Unix systems.
+In order to run SSTAR under Windows you need Java Runtime Environment (JRE) 6 or newer and standalone BLAST 2.2.29+, BLAST 2.2.30+ or BLAST 2.2.31+.
 SSTAR for Linux and OS X is compatible with JRE6 or newer and all BLAST+ versions.
 
 **For Windows users**
@@ -59,7 +59,7 @@ Load your **.bash_profile** or **.profile** into the current shell or command pr
     source .profile
 ```
 
-You can check if your variables were exported correctly using the **echo** command and the commands should return "blastn" and "makeblastdb" 
+You can check if your variables were exported correctly using the **echo** command and the commands should return "blastn" and "makeblastdb"
 ```bash
     echo $BLASTN
     echo $MAKEBLASTDB
@@ -73,12 +73,12 @@ You can check if your variables were exported correctly using the **echo** comma
 
 AR gene databases
 -----------------
-We generated an AR gene database from Resfinder and ARG-ANNOT data, called resGANNOT. Nucleotide genes were clustered using CD-HIT at 90% sequence similarity and redundant entries were discarded. 
-resGANNOT was created and maintained by **Nicholas Vlachos** (NVX4@cdc.gov)
+We have generated an AR gene database from Resfinder and ARG-ANNOT data, called resGANNOT. Nucleotide genes were clustered using CD-HIT at 90% sequence similarity and redundant entries were discarded.
+resGANNOT is maintained by **Nicholas Vlachos** (NVX4@cdc.gov)
 
 Input data
 ----------
-One needs two input files in order for SSTAR to run: A microbial genome assembly and AR gene file, both in FASTA format. SSTAR is developed in a certain way so it can handle the ‘SRST2 database header’ format. Two AR database files are included with SSTAR, a SRST2 modified ARG-ANNOT database and a SRST2 modified Resfinder database. 
+One needs two input files for SSTAR to run: A microbial genome assembly and AR gene file, both in FASTA format. SSTAR is developed in a certain way so it can handle the ‘SRST2 database header’ format. Two AR database files are included with SSTAR, a SRST2 modified ARG-ANNOT database and a SRST2 modified Resfinder database. 
 This format is specified below.
 
 **The AR gene file header format**
@@ -90,11 +90,11 @@ The format of each AR gene FASTA header is structured like the below example:
 The AR gene family is between the first and second double underscore (CMY_Bla) and the variant is between the second and third double underscore (CMY-37).
 The first number (92) is a unique identifier for each AR gene group. The last number (402) is a unique identifier for each single variant. The other information in the header (right of the space) is ignored by SSTAR and not shown in this manual example.
 
-Users who want to use different AR databases (ResFinder or custom databases) need to make sure the headers have the exact same structure as the SRST2 header format. 
+Users who want to use different AR databases (ResFinder or custom databases) need to make sure the headers have the exact same structure as the SRST2 header format.
 
 Running SSTAR
 -------------
-SSTAR contains an easy interface with currently only four buttons. The top two buttons are for uploading the genome assembly file and the AR gene database file. Both files need to be in FASTA format. 
+SSTAR contains an easy interface with currently only four buttons. The top two buttons are for uploading the genome assembly file and the AR gene database file. Both files need to be in FASTA format.
 One needs to enter a sequence similarity percentage value that serves as cut-off for detecting potential new variants of AR genes. A value between 80 and 99% is recommended.
 The ‘Identify resistance genes’ button starts the actual AR gene annotation process. The genes will be listed in the the second output window.
 
@@ -104,7 +104,7 @@ The second output window displays the AR resistance genes and porins that are id
 
 1.	The AR gene name
 2.	The contig, scaffold or chromosome where the AR gene is located
-3.	Sequence similarity 
+3.	Sequence similarity
 4.	Alignment length
 5.	AR gene length
 
@@ -115,15 +115,15 @@ Below the potential new variants SSTAR lists the AR genes that share 100% sequen
 
 **Detecting new and truncated AR gene variants**
 
-The bottom output window will show putative new variants and truncated enzymes in protein space. The protein sequences can be exported to a plain text file, in FASTA format, using the export button. The file is saved in the same directory as the input genome assembly file. 
-The protein file can be used with BLASTP against the NR database of NCBI for detecting new variants. Potential novel beta-lactamase proteins can be submitted to the NCBI (http://www.ncbi.nlm.nih.gov/pathogens/submit_beta_lactamase/) for verification. 
-Translated start codons (Methionines, M) are capitalized so the user gets a better idea where the protein starts. Not all proteins start with an M, however in that case SSTAR will report the ORF with the fewest internal stop codons. 
+The bottom output window will show putative new variants and truncated enzymes in protein space. The protein sequences can be exported to a plain text file, in FASTA format, using the export button. The file is saved in the same directory as the input genome assembly file.
+The protein file can be used with BLASTP against the NR database of NCBI for detecting new variants. Potential novel beta-lactamase proteins can be submitted to the NCBI (http://www.ncbi.nlm.nih.gov/pathogens/submit_beta_lactamase/) for verification.
+Translated start codons (Methionines, M) are capitalized so the user gets a better idea where the protein starts. Not all proteins start with an M, however in that case SSTAR will report the ORF with the fewest internal stop codons.
 When a protein sequence contains an internal stop codon it will be flagged underneath the FASTA header of that particular protein. This makes the FASTA file invalid and forces the user to remove that sequence from the file. Protein sequences with internal stop codons are otherwise easily missed and misinterpreted as putative new variants of an AR gene group.
 
 **Detecting modified and truncated outer membrane porin sequences**
 
-The bottom output window will also show modified and/or truncated outer membrane porins (OMPs). We have included OmpK35, OmpK36 and OmpK37 from Klebsiella pneumoniae, OmpC and OmpF from Escherichia coli, OmpC and OmpF from Enterobacter cloacae and Omp35 and Omp36 from Enterobacter earogenes. 
-When a porin protein sequence contains an internal stop codon it will be flagged underneath the FASTA header of that particular porin as truncated. 
+The bottom output window will also show modified and/or truncated outer membrane porins (OMPs). We have included OmpK35, OmpK36 and OmpK37 from Klebsiella pneumoniae, OmpC and OmpF from Escherichia coli, OmpC and OmpF from Enterobacter cloacae and Omp35 and Omp36 from Enterobacter earogenes.
+When a porin protein sequence contains an internal stop codon it will be flagged underneath the FASTA header of that particular porin as truncated.
 
 BLAST output file produced by SSTAR
 ------------------------------
@@ -137,13 +137,13 @@ The BLASTN file is in tabular form and each line represents an allele that was p
 4. 	Alignment length
 5. 	Number of mismatches
 6. 	Number of gap opens
-7. 	Start position in query 
-8. 	End position in query 
+7. 	Start position in query
+8. 	End position in query
 9. 	Start position in target
 10. End position in target
-11. E-value 
+11. E-value
 12. Bit score
-13. Query length 
+13. Query length
 
 
 Planned features
@@ -158,11 +158,11 @@ Planned features
 FAQ
 ---
 1.	**SSTAR doesn’t like certain CLC Genomics Workbench assembly files. Why?**<br />
-	
-	CLC generates FASTA headers that contain spaces.<br /> 
+
+	CLC generates FASTA headers that contain spaces.<br />
 	Since all information immediately right of the first space is disregarded it can cause each contig/scaffold to have the exact same name as all the other contigs/scaffolds. 	This will cause issues during downstream analyses since SSTAR won’t be able to discern between the different contigs.<br />
 	The issue can be fixed by converting the FASTA headers to a “SSTAR-friendly” format using the split_fasta_header_on_space.pl script in the **Scripts** folder.
-	
+
 
 Citing SSTAR
 ------------
@@ -171,18 +171,13 @@ de Man TJB, Limbago BM. 2016. SSTAR, a stand-alone easy-to-use antimicrobial res
 mSphere 1(1): e00050-15
 
 **When using the ARG-ANNOT database please also cite:**<br />
-Gupta SK, Padmanabhan BR, Diene SM, Lopez-Rojas R, Kempf M, Landraud L, Rolain J-M. 2014. ARG-ANNOT (Antibiotic Resistance Gene-ANNOTation), a new bioinformatic tool to discover antibiotic resistance genes in bacterial genomes. 
+Gupta SK, Padmanabhan BR, Diene SM, Lopez-Rojas R, Kempf M, Landraud L, Rolain J-M. 2014. ARG-ANNOT (Antibiotic Resistance Gene-ANNOTation), a new bioinformatic tool to discover antibiotic resistance genes in bacterial genomes.
 Antimicrobial Agents and Chemotherapy 58:212–220.
 
-**When using the ResFinder database please also cite:**<br /> 
-Zankari E, Hasman H, Cosentino S, Vestergaard M, Rasmussen S, Lund O, Aarestrup F, Larsen MV. 2012. Identification of acquired antimicrobial resistance genes. 
+**When using the ResFinder database please also cite:**<br />
+Zankari E, Hasman H, Cosentino S, Vestergaard M, Rasmussen S, Lund O, Aarestrup F, Larsen MV. 2012. Identification of acquired antimicrobial resistance genes.
 Journal of Antimicrobial Chemotherapy 67:2640–2644.
 
 Contact
 -------
 For assistance, feedback or suggestions please contact Tom de Man via xku6@cdc.gov or tjb.deman@gmail.com
- 
-
-
-
-
