@@ -180,4 +180,4 @@ Journal of Antimicrobial Chemotherapy 67:2640–2644.
 
 Contact
 -------
-For assistance, feedback or suggestions please contact Tom de Man via xku6@cdc.gov or tjb.deman@gmail.com
+For assistance, feedback or suggestions please contact Tom de Man via tjb.deman@gmail.com
