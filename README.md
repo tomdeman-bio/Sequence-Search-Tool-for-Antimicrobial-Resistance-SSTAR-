@@ -20,7 +20,7 @@ Table of Contents
 Introduction
 ------------
 SSTAR enables fast and accurate antimicrobial resistance (AR) surveillance from Whole Genome Sequencing (WGS) data. It is able to identify known AR genes and detect putative new variants as well as truncated genes due to internal stop codons.
-SSTAR also reports modifications and/or truncations in outer membrane porins.
+SSTAR can also report modifications and/or truncations in outer membrane porin genes.
 
 Two SSTAR versions
 -----------------------------------------------------------------
@@ -31,9 +31,9 @@ Two SSTAR versions
 
 **JAR and Java files**
 
-* Each SSTAR version is available as an executable JAR file. Double click on this file and the SSTAR tool will pop up on your screen
-* The raw Java files are available as well for those people who want to explore the source code
-* SSTAR was successfully tested under Windows 7 and Windows 10, OS X 10.9.5 and Ubuntu 14.04 LTS
+* Each SSTAR version is available as an executable JAR file. Double click on this file and SSTAR will pop up on your screen
+* Raw Java files are also available for those who want to explore the source code
+* SSTAR was successfully tested under Windows 7 and Windows 10, OS X 10.9.5, and Ubuntu 14.04 LTS
 
 Obtaining and installing SSTAR dependencies
 -------------------------------------------
@@ -148,12 +148,12 @@ The BLASTN file is in tabular form and each line represents an allele that was p
 
 Planned features
 ----------------
-1.	Multiple genome assembly file upload (multithreading)
+1.	Multiple genome assembly file upload **<-- please see [c-SSTAR](https://github.com/chrisgulvik/c-SSTAR)**
 2.	Compatibility with other BLAST+ versions (Windows version only, Unix version works with all BLAST versions already)
 3.	An eraser button for all three output windows
-4.	A method to use two AR gene databases (ResFinder and ARG-ANNOT) simultaneously
+4.	A method to use two AR gene databases (ResFinder and ARG-ANNOT) simultaneously **<-- please use our combined AR gene database "resGANNOT"**
 5.	Add HMMER functionality for detecting new genes
-6.	Build a command line version of SSTAR for Linux and OS X
+6.	Build command line version of SSTAR for Linux and OS X **<-- please see [c-SSTAR](https://github.com/chrisgulvik/c-SSTAR)**
 
 FAQ
 ---
