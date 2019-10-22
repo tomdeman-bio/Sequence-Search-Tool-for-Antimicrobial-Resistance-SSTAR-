@@ -45,7 +45,7 @@ SSTAR for Linux and OS X is compatible with JRE6 or newer and all BLAST+ version
 * BLAST+ needs to be installed in **C:\\Program Files\\NCBI** which is the default location when following the BLAST installation steps in the installation wizard. SSTAR for Windows is currently compatible with BLAST versions: 2.2.29+, 2.2.30+, 2.2.31+, 2.5.0+ and 2.6.0+
 
 **For OS X and Linux users**
-* BLAST+ can be installed anywhere and SSTAR is compatible with all BLAST+ versions. BLAST+ needs to be added to your PATH variable. Additionally, please add the two lines listed below to your **.bash_profile** or **.profile** depending on your shell, and operating system
+* BLAST+ can be installed anywhere and SSTAR is compatible with all BLAST+ versions. BLAST+ needs to be added to your PATH variable. Additionally, please add (using the "echo" command) two important lines to your **.bash_profile** or **.profile** depending on your shell, and operating system
 ```bash
     echo 'export BLASTN="blastn"' >> $HOME/.bash_profile
     echo 'export MAKEBLASTDB="makeblastdb"' >> $HOME/.bash_profile
