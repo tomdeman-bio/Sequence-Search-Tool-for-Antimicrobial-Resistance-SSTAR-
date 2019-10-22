@@ -47,8 +47,8 @@ SSTAR for Linux and OS X is compatible with JRE6 or newer and all BLAST+ version
 **For OS X and Linux users**
 * BLAST+ can be installed anywhere and SSTAR is compatible with all BLAST+ versions. BLAST+ needs to be added to your PATH variable. Additionally, please add the two lines listed below to your **.bash_profile** or **.profile** depending on your shell, and operating system
 ```bash
-    export BLASTN="blastn"
-    export MAKEBLASTDB="makeblastdb"
+    echo 'export BLASTN="blastn"' >> $HOME/.bash_profile
+    echo 'export MAKEBLASTDB="makeblastdb"' >> $HOME/.bash_profile
 ```
 
 Load your **.bash_profile** or **.profile** into the current shell or command prompt
